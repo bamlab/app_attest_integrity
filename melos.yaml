@@ -1,0 +1,22 @@
+name: app_attest_integrity
+
+packages:
+  - .
+
+
+scripts:
+  analyze:
+    run: melos analyze:dart && melos analyze:dcm
+    description: Run analyzer and dcm
+  format:
+    run: dart format lib test
+    description: Run formatter
+  analyze:dart:
+    exec: |
+      dart analyze --fatal-infos . && \
+      dart format --set-exit-if-changed lib test
+    description: Run analyzer
+  analyze:dcm:
+    exec: |
+      dcm analyze lib --fatal-style --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL
+    description: Run dcm

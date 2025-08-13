@@ -17,7 +17,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  melos: ^6.3.3
+  theodo_analysis: ^1.5.0
 
 
 flutter:
@@ -28,4 +29,5 @@ flutter:
         pluginClass: AppAttestIntegrityPlugin
       ios:
         pluginClass: AppAttestIntegrityPlugin
+
 
