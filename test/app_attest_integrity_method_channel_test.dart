@@ -1,16 +1,16 @@
+import 'package:app_attest_integrity/app_attest_integrity_method_channel.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:app_attest_integrity/app_attest_integrity_method_channel.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelAppAttestIntegrity platform = MethodChannelAppAttestIntegrity();
-  const MethodChannel channel = MethodChannel('app_attest_integrity');
+  final platform = MethodChannelAppAttestIntegrity();
+  const channel = MethodChannel('app_attest_integrity');
 
   setUp(() {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(channel, (MethodCall methodCall) async {
+        .setMockMethodCallHandler(channel, (methodCall) async {
           return '42';
         });
   });
