@@ -7,13 +7,13 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockAppAttestIntegrityPlatform
     with MockPlatformInterfaceMixin
     implements AppAttestIntegrityPlatform {
-
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
 }
 
 void main() {
-  final AppAttestIntegrityPlatform initialPlatform = AppAttestIntegrityPlatform.instance;
+  final AppAttestIntegrityPlatform initialPlatform =
+      AppAttestIntegrityPlatform.instance;
 
   test('$MethodChannelAppAttestIntegrity is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelAppAttestIntegrity>());
@@ -21,7 +21,8 @@ void main() {
 
   test('getPlatformVersion', () async {
     AppAttestIntegrity appAttestIntegrityPlugin = AppAttestIntegrity();
-    MockAppAttestIntegrityPlatform fakePlatform = MockAppAttestIntegrityPlatform();
+    MockAppAttestIntegrityPlatform fakePlatform =
+        MockAppAttestIntegrityPlatform();
     AppAttestIntegrityPlatform.instance = fakePlatform;
 
     expect(await appAttestIntegrityPlugin.getPlatformVersion(), '42');

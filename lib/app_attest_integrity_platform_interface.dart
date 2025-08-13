@@ -8,7 +8,8 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static AppAttestIntegrityPlatform _instance = MethodChannelAppAttestIntegrity();
+  static AppAttestIntegrityPlatform _instance =
+      MethodChannelAppAttestIntegrity();
 
   /// The default instance of [AppAttestIntegrityPlatform] to use.
   ///
