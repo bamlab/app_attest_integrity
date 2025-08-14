@@ -58,6 +58,7 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface AppAttestIntegrityApi {
   fun getPlatformVersion(): String?
+  fun androidPrepareIntegrityServer(cloudProjectNumber: Long)
 
   companion object {
     /** The codec used by AppAttestIntegrityApi. */
@@ -74,6 +75,24 @@ interface AppAttestIntegrityApi {
           channel.setMessageHandler { _, reply ->
             val wrapped: List<Any?> = try {
               listOf(api.getPlatformVersion())
+            } catch (exception: Throwable) {
+              MessagesPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.androidPrepareIntegrityServer$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val cloudProjectNumberArg = args[0] as Long
+            val wrapped: List<Any?> = try {
+              api.androidPrepareIntegrityServer(cloudProjectNumberArg)
+              listOf(null)
             } catch (exception: Throwable) {
               MessagesPigeonUtils.wrapError(exception)
             }
