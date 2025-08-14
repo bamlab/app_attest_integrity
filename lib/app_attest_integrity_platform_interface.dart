@@ -35,4 +35,21 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  /// [Android only]<br/>
+  /// Warm up the integrity API server.
+  ///
+  /// Use this method on Android when you plan to use the `verify` method
+  /// in a near future.
+  /// See [this android official doc](https://developer.android.com/google/play/integrity/standard) for more details.
+  ///
+  /// [cloudProjectNumber] is the cloud project number of your app.
+  /// It can be found in the Google Play Console.
+  ///
+  /// This method will do nothing on iOS.
+  Future<void> androidPrepareIntegrityServer(int cloudProjectNumber) {
+    throw UnimplementedError(
+      'androidPrepareIntegrityServer() has not been implemented.',
+    );
+  }
 }
