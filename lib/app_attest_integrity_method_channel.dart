@@ -14,4 +14,11 @@ class MethodChannelAppAttestIntegrity extends AppAttestIntegrityPlatform {
   Future<String?> getPlatformVersion() {
     return AppAttestIntegrityApi().getPlatformVersion();
   }
+
+  @override
+  Future<void> androidPrepareIntegrityServer(int cloudProjectNumber) {
+    return AppAttestIntegrityApi().androidPrepareIntegrityServer(
+      cloudProjectNumber,
+    );
+  }
 }
