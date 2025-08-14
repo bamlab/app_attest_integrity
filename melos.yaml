@@ -20,3 +20,6 @@ scripts:
     exec: |
       dcm analyze lib --fatal-style --ci-key=$DCM_CI_KEY --email=$DCM_LICENSE_EMAIL
     description: Run dcm
+  pigeon: 
+    run: dart run pigeon --input pigeon/messages.dart
+    description: Run pigeon generation

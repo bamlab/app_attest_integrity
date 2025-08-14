@@ -18,6 +18,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   melos: ^6.3.3
+  pigeon: ^26.0.1
   theodo_analysis: ^1.5.0
 
 
