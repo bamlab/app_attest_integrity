@@ -88,6 +88,7 @@ class MessagesPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol AppAttestIntegrityApi {
   func getPlatformVersion() throws -> String?
+  func androidPrepareIntegrityServer(cloudProjectNumber: Int64) throws
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -108,6 +109,21 @@ class AppAttestIntegrityApiSetup {
       }
     } else {
       getPlatformVersionChannel.setMessageHandler(nil)
+    }
+    let androidPrepareIntegrityServerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.androidPrepareIntegrityServer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      androidPrepareIntegrityServerChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let cloudProjectNumberArg = args[0] as! Int64
+        do {
+          try api.androidPrepareIntegrityServer(cloudProjectNumber: cloudProjectNumberArg)
+          reply(wrapResult(nil))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      androidPrepareIntegrityServerChannel.setMessageHandler(nil)
     }
   }
 }

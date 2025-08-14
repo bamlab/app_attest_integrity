@@ -12,4 +12,8 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
     public func getPlatformVersion() throws -> String? {
            return "iOS " + UIDevice.current.systemVersion
        }
+    
+    public func androidPrepareIntegrityServer(cloudProjectNumber: Int64) {
+        return
+    }
 }
