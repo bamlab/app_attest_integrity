@@ -1,4 +1,5 @@
 import 'package:app_attest_integrity/app_attest_integrity_platform_interface.dart';
+import 'package:app_attest_integrity/src/messages.g.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -11,6 +12,6 @@ class MethodChannelAppAttestIntegrity extends AppAttestIntegrityPlatform {
 
   @override
   Future<String?> getPlatformVersion() {
-    return methodChannel.invokeMethod<String>('getPlatformVersion');
+    return AppAttestIntegrityApi().getPlatformVersion();
   }
 }
