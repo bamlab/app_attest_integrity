@@ -1,4 +1,4 @@
-package com.example.app_attest_integrity
+package com.theodo.app_attest_integrity
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall

@@ -1,4 +1,4 @@
-group = "com.example.app_attest_integrity"
+group = "com.theodo.app_attest_integrity"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -25,7 +25,7 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 android {
-    namespace = "com.example.app_attest_integrity"
+    namespace = "com.theodo.app_attest_integrity"
 
     compileSdk = 35
 

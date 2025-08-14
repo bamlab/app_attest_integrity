@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.app_attest_integrity_example"
+    namespace = "com.theodo.app_attest_integrity_example"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.app_attest_integrity_example"
+        applicationId = "com.theodo.app_attest_integrity_example"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
