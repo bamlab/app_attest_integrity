@@ -9,7 +9,7 @@ import 'package:pigeon/pigeon.dart';
     kotlinOut:
         'android/src/main/kotlin/com/theodo/app_attest_integrity/Messages.g.kt',
     kotlinOptions: KotlinOptions(),
-    swiftOut: 'ios/Runner/Messages.g.swift',
+    swiftOut: 'ios/Classes/Messages.g.swift',
     swiftOptions: SwiftOptions(),
     dartPackageName: 'app_attest_integrity',
   ),

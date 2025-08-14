@@ -1,19 +1,15 @@
 import Flutter
 import UIKit
 
-public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin {
+public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegrityApi {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "app_attest_integrity", binaryMessenger: registrar.messenger())
-    let instance = AppAttestIntegrityPlugin()
-    registrar.addMethodCallDelegate(instance, channel: channel)
+      let messenger: FlutterBinaryMessenger = registrar.messenger()
+      let api: AppAttestIntegrityApi & NSObjectProtocol = AppAttestIntegrityPlugin.init()
+
+      AppAttestIntegrityApiSetup.setUp(binaryMessenger: messenger, api: api)
   }
 
-  public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    switch call.method {
-    case "getPlatformVersion":
-      result("iOS " + UIDevice.current.systemVersion)
-    default:
-      result(FlutterMethodNotImplemented)
-    }
-  }
+    public func getPlatformVersion() throws -> String? {
+           return "iOS " + UIDevice.current.systemVersion
+       }
 }
