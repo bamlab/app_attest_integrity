@@ -1,5 +1,6 @@
 import 'package:app_attest_integrity/app_attest_integrity_platform_interface.dart';
 import 'package:app_attest_integrity/src/messages.g.dart';
+import 'package:app_attest_integrity/src/model/generate_assertion_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -19,6 +20,22 @@ class MethodChannelAppAttestIntegrity extends AppAttestIntegrityPlatform {
   Future<void> androidPrepareIntegrityServer(int cloudProjectNumber) {
     return AppAttestIntegrityApi().androidPrepareIntegrityServer(
       cloudProjectNumber,
+    );
+  }
+
+  @override
+  Future<GenerateAssertionResponse?> iOSgenerateAttestation(
+    String challenge,
+  ) async {
+    final response = await AppAttestIntegrityApi().iOSgenerateAttestation(
+      challenge,
+    );
+    if (response == null) {
+      return null;
+    }
+    return GenerateAssertionResponse(
+      attestation: response.attestation,
+      keyId: response.keyId,
     );
   }
 }

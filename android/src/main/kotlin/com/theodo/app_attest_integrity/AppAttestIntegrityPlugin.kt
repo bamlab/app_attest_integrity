@@ -43,8 +43,8 @@ class AppAttestIntegrityPlugin: FlutterPlugin, AppAttestIntegrityApi {
       }
   }
 
-  override fun iOSgenerateAttestation(challenge: String): GenerateAssertionResponsePigeon {
-    
+  override fun iOSgenerateAttestation(challenge: String): GenerateAssertionResponsePigeon? {
+    return null
   }
 
 }
