@@ -2,6 +2,7 @@ package com.theodo.app_attest_integrity
 
 import AppAttestIntegrityApi
 import FlutterError
+import GenerateAssertionResponsePigeon
 import android.content.Context
 import com.google.android.play.core.integrity.IntegrityManagerFactory
 import com.google.android.play.core.integrity.StandardIntegrityManager
@@ -40,6 +41,10 @@ class AppAttestIntegrityPlugin: FlutterPlugin, AppAttestIntegrityApi {
       }?.addOnFailureListener { exception: Exception? ->
         throw FlutterError("failed to prepare Integrity Token: ${exception?.message?:"no details"}" )
       }
+  }
+
+  override fun iOSgenerateAttestation(challenge: String): GenerateAssertionResponsePigeon {
+    
   }
 
 }

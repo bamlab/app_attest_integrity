@@ -64,11 +64,119 @@ private func nilOrValue<T>(_ value: Any?) -> T? {
   return value as! T?
 }
 
+func deepEqualsMessages(_ lhs: Any?, _ rhs: Any?) -> Bool {
+  let cleanLhs = nilOrValue(lhs) as Any?
+  let cleanRhs = nilOrValue(rhs) as Any?
+  switch (cleanLhs, cleanRhs) {
+  case (nil, nil):
+    return true
+
+  case (nil, _), (_, nil):
+    return false
+
+  case is (Void, Void):
+    return true
+
+  case let (cleanLhsHashable, cleanRhsHashable) as (AnyHashable, AnyHashable):
+    return cleanLhsHashable == cleanRhsHashable
+
+  case let (cleanLhsArray, cleanRhsArray) as ([Any?], [Any?]):
+    guard cleanLhsArray.count == cleanRhsArray.count else { return false }
+    for (index, element) in cleanLhsArray.enumerated() {
+      if !deepEqualsMessages(element, cleanRhsArray[index]) {
+        return false
+      }
+    }
+    return true
+
+  case let (cleanLhsDictionary, cleanRhsDictionary) as ([AnyHashable: Any?], [AnyHashable: Any?]):
+    guard cleanLhsDictionary.count == cleanRhsDictionary.count else { return false }
+    for (key, cleanLhsValue) in cleanLhsDictionary {
+      guard cleanRhsDictionary.index(forKey: key) != nil else { return false }
+      if !deepEqualsMessages(cleanLhsValue, cleanRhsDictionary[key]!) {
+        return false
+      }
+    }
+    return true
+
+  default:
+    // Any other type shouldn't be able to be used with pigeon. File an issue if you find this to be untrue.
+    return false
+  }
+}
+
+func deepHashMessages(value: Any?, hasher: inout Hasher) {
+  if let valueList = value as? [AnyHashable] {
+     for item in valueList { deepHashMessages(value: item, hasher: &hasher) }
+     return
+  }
+
+  if let valueDict = value as? [AnyHashable: AnyHashable] {
+    for key in valueDict.keys { 
+      hasher.combine(key)
+      deepHashMessages(value: valueDict[key]!, hasher: &hasher)
+    }
+    return
+  }
+
+  if let hashableValue = value as? AnyHashable {
+    hasher.combine(hashableValue.hashValue)
+  }
+
+  return hasher.combine(String(describing: value))
+}
+
+    
+
+/// Generated class from Pigeon that represents data sent in messages.
+struct GenerateAssertionResponsePigeon: Hashable {
+  var attestation: String
+  var keyId: String
+
+
+  // swift-format-ignore: AlwaysUseLowerCamelCase
+  static func fromList(_ pigeonVar_list: [Any?]) -> GenerateAssertionResponsePigeon? {
+    let attestation = pigeonVar_list[0] as! String
+    let keyId = pigeonVar_list[1] as! String
+
+    return GenerateAssertionResponsePigeon(
+      attestation: attestation,
+      keyId: keyId
+    )
+  }
+  func toList() -> [Any?] {
+    return [
+      attestation,
+      keyId,
+    ]
+  }
+  static func == (lhs: GenerateAssertionResponsePigeon, rhs: GenerateAssertionResponsePigeon) -> Bool {
+    return deepEqualsMessages(lhs.toList(), rhs.toList())  }
+  func hash(into hasher: inout Hasher) {
+    deepHashMessages(value: toList(), hasher: &hasher)
+  }
+}
 
 private class MessagesPigeonCodecReader: FlutterStandardReader {
+  override func readValue(ofType type: UInt8) -> Any? {
+    switch type {
+    case 129:
+      return GenerateAssertionResponsePigeon.fromList(self.readValue() as! [Any?])
+    default:
+      return super.readValue(ofType: type)
+    }
+  }
 }
 
 private class MessagesPigeonCodecWriter: FlutterStandardWriter {
+  override func writeValue(_ value: Any) {
+    if let value = value as? GenerateAssertionResponsePigeon {
+      super.writeByte(129)
+      super.writeValue(value.toList())
+    } else {
+      super.writeValue(value)
+    }
+  }
 }
 
 private class MessagesPigeonCodecReaderWriter: FlutterStandardReaderWriter {
@@ -89,6 +197,7 @@ class MessagesPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 protocol AppAttestIntegrityApi {
   func getPlatformVersion() throws -> String?
   func androidPrepareIntegrityServer(cloudProjectNumber: Int64) throws
+  func iOSgenerateAttestation(challenge: String) throws -> GenerateAssertionResponsePigeon?
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -124,6 +233,21 @@ class AppAttestIntegrityApiSetup {
       }
     } else {
       androidPrepareIntegrityServerChannel.setMessageHandler(nil)
+    }
+    let iOSgenerateAttestationChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.iOSgenerateAttestation\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      iOSgenerateAttestationChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let challengeArg = args[0] as! String
+        do {
+          let result = try api.iOSgenerateAttestation(challenge: challengeArg)
+          reply(wrapResult(result))
+        } catch {
+          reply(wrapError(error))
+        }
+      }
+    } else {
+      iOSgenerateAttestationChannel.setMessageHandler(nil)
     }
   }
 }

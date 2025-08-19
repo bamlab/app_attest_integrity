@@ -33,6 +33,36 @@ private object MessagesPigeonUtils {
       )
     }
   }
+  fun deepEquals(a: Any?, b: Any?): Boolean {
+    if (a is ByteArray && b is ByteArray) {
+        return a.contentEquals(b)
+    }
+    if (a is IntArray && b is IntArray) {
+        return a.contentEquals(b)
+    }
+    if (a is LongArray && b is LongArray) {
+        return a.contentEquals(b)
+    }
+    if (a is DoubleArray && b is DoubleArray) {
+        return a.contentEquals(b)
+    }
+    if (a is Array<*> && b is Array<*>) {
+      return a.size == b.size &&
+          a.indices.all{ deepEquals(a[it], b[it]) }
+    }
+    if (a is List<*> && b is List<*>) {
+      return a.size == b.size &&
+          a.indices.all{ deepEquals(a[it], b[it]) }
+    }
+    if (a is Map<*, *> && b is Map<*, *>) {
+      return a.size == b.size && a.all {
+          (b as Map<Any?, Any?>).containsKey(it.key) &&
+          deepEquals(it.value, b[it.key])
+      }
+    }
+    return a == b
+  }
+      
 }
 
 /**
@@ -46,12 +76,56 @@ class FlutterError (
   override val message: String? = null,
   val details: Any? = null
 ) : Throwable()
+
+/** Generated class from Pigeon that represents data sent in messages. */
+data class GenerateAssertionResponsePigeon (
+  val attestation: String,
+  val keyId: String
+)
+ {
+  companion object {
+    fun fromList(pigeonVar_list: List<Any?>): GenerateAssertionResponsePigeon {
+      val attestation = pigeonVar_list[0] as String
+      val keyId = pigeonVar_list[1] as String
+      return GenerateAssertionResponsePigeon(attestation, keyId)
+    }
+  }
+  fun toList(): List<Any?> {
+    return listOf(
+      attestation,
+      keyId,
+    )
+  }
+  override fun equals(other: Any?): Boolean {
+    if (other !is GenerateAssertionResponsePigeon) {
+      return false
+    }
+    if (this === other) {
+      return true
+    }
+    return MessagesPigeonUtils.deepEquals(toList(), other.toList())  }
+
+  override fun hashCode(): Int = toList().hashCode()
+}
 private open class MessagesPigeonCodec : StandardMessageCodec() {
   override fun readValueOfType(type: Byte, buffer: ByteBuffer): Any? {
-    return     super.readValueOfType(type, buffer)
+    return when (type) {
+      129.toByte() -> {
+        return (readValue(buffer) as? List<Any?>)?.let {
+          GenerateAssertionResponsePigeon.fromList(it)
+        }
+      }
+      else -> super.readValueOfType(type, buffer)
+    }
   }
   override fun writeValue(stream: ByteArrayOutputStream, value: Any?)   {
-    super.writeValue(stream, value)
+    when (value) {
+      is GenerateAssertionResponsePigeon -> {
+        stream.write(129)
+        writeValue(stream, value.toList())
+      }
+      else -> super.writeValue(stream, value)
+    }
   }
 }
 
@@ -59,6 +133,7 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
 interface AppAttestIntegrityApi {
   fun getPlatformVersion(): String?
   fun androidPrepareIntegrityServer(cloudProjectNumber: Long)
+  fun iOSgenerateAttestation(challenge: String): GenerateAssertionResponsePigeon?
 
   companion object {
     /** The codec used by AppAttestIntegrityApi. */
@@ -93,6 +168,23 @@ interface AppAttestIntegrityApi {
             val wrapped: List<Any?> = try {
               api.androidPrepareIntegrityServer(cloudProjectNumberArg)
               listOf(null)
+            } catch (exception: Throwable) {
+              MessagesPigeonUtils.wrapError(exception)
+            }
+            reply.reply(wrapped)
+          }
+        } else {
+          channel.setMessageHandler(null)
+        }
+      }
+      run {
+        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.iOSgenerateAttestation$separatedMessageChannelSuffix", codec)
+        if (api != null) {
+          channel.setMessageHandler { message, reply ->
+            val args = message as List<Any?>
+            val challengeArg = args[0] as String
+            val wrapped: List<Any?> = try {
+              listOf(api.iOSgenerateAttestation(challengeArg))
             } catch (exception: Throwable) {
               MessagesPigeonUtils.wrapError(exception)
             }

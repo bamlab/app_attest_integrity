@@ -18,4 +18,15 @@ import 'package:pigeon/pigeon.dart';
 abstract class AppAttestIntegrityApi {
   String? getPlatformVersion();
   void androidPrepareIntegrityServer(int cloudProjectNumber);
+
+  GenerateAssertionResponsePigeon? iOSgenerateAttestation(String challenge);
+}
+
+class GenerateAssertionResponsePigeon {
+  const GenerateAssertionResponsePigeon({
+    required this.attestation,
+    required this.keyId,
+  });
+  final String attestation;
+  final String keyId;
 }
