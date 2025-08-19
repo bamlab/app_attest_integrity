@@ -21,8 +21,12 @@ class AppAttestIntegrity {
   /// in a near future.
   /// See [this android official doc](https://developer.android.com/google/play/integrity/standard) for more details.
   ///
+  /// Throws if the warmup fails, or if the method had already been called.
+  ///
   /// [cloudProjectNumber] is the cloud project number of your app.
   /// It can be found in the Google Play Console.
+  ///
+  /// This method will do nothing on iOS.
   Future<void> androidPrepareIntegrityServer(int cloudProjectNumber) {
     return AppAttestIntegrityPlatform.instance.androidPrepareIntegrityServer(
       cloudProjectNumber,
