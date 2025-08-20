@@ -69,9 +69,40 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
          }
      }
     
+
     func verify(clientData: String, keyID: String, completion: @escaping (Result<String, Error>) -> Void) {
-        completion(.failure(PigeonError(code: "0", message: "Unimplemented method", details: nil)))
+      
+        guard #available(iOS 14.0, *) else {
+        completion(.failure(PigeonError(code: "unavailable", message: "App Attest requires iOS 14.0+", details: nil)))
+        return
+        }
+
+        let service = DCAppAttestService.shared
+        guard service.isSupported else {
+        completion(.failure(PigeonError(code: "unsupported", message: "App Attest is not supported on this device.", details: nil)))
+        return
+        }
+
+        let clientDataHash = Data(SHA256.hash(data: Data(clientData.utf8)))
+
+    
+        service.generateAssertion(keyID, clientDataHash: clientDataHash) { assertion, err in
+          guard err == nil, let assertion = assertion else {
+            let error = err as NSError?
+            completion(.failure(PigeonError(
+              code: "generate_assertion_failed",
+              message: "Failed to generate App Attest assertion.",
+              details: ["domain": error?.domain ?? "", "code": error?.code ?? -1, "desc": error?.localizedDescription ?? ""]
+            )))
+            return
+          }
+            
+          completion(.success(assertion.base64EncodedString()))
+        }
     }
+    
+        
+    
 }
 
 
