@@ -35,9 +35,9 @@ class AppAttestIntegrity {
   }
 
   /// [iOS only]<br/>
-  /// Creates a key pair and returns the corresponding attestation and keyID
-  /// to be sent to the server.
-  /// Then, the attestation is verified using the [challenge].
+  /// Creates a key pair and verifies it using the [challenge],
+  /// which creates an attestation.
+  /// Returns the corresponding attestation and keyID to be sent to the server.
   ///
   /// The attestation can be seen as a public key for later integrity checks.
   /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity) for more details
