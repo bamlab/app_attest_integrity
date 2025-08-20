@@ -38,4 +38,9 @@ class MethodChannelAppAttestIntegrity extends AppAttestIntegrityPlatform {
       keyId: response.keyId,
     );
   }
+
+  @override
+  Future<String> verify(String clientData, String keyID) {
+    return AppAttestIntegrityApi().verify(clientData, keyID);
+  }
 }

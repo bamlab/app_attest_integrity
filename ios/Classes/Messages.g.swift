@@ -199,6 +199,7 @@ protocol AppAttestIntegrityApi {
   func getPlatformVersion() throws -> String?
   func androidPrepareIntegrityServer(cloudProjectNumber: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   func iOSgenerateAttestation(challenge: String, completion: @escaping (Result<GenerateAssertionResponsePigeon?, Error>) -> Void)
+  func verify(clientData: String, keyID: String, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -253,6 +254,24 @@ class AppAttestIntegrityApiSetup {
       }
     } else {
       iOSgenerateAttestationChannel.setMessageHandler(nil)
+    }
+    let verifyChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.verify\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
+    if let api = api {
+      verifyChannel.setMessageHandler { message, reply in
+        let args = message as! [Any?]
+        let clientDataArg = args[0] as! String
+        let keyIDArg = args[1] as! String
+        api.verify(clientData: clientDataArg, keyID: keyIDArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
+        }
+      }
+    } else {
+      verifyChannel.setMessageHandler(nil)
     }
   }
 }

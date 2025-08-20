@@ -21,6 +21,8 @@ abstract class AppAttestIntegrityApi {
   void androidPrepareIntegrityServer(int cloudProjectNumber);
   @async
   GenerateAssertionResponsePigeon? iOSgenerateAttestation(String challenge);
+  @async
+  String verify(String clientData, String keyID);
 }
 
 class GenerateAssertionResponsePigeon {

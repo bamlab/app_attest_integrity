@@ -54,4 +54,8 @@ class AppAttestIntegrityPlugin : FlutterPlugin, AppAttestIntegrityApi {
         callback(Result.success(null))
     }
 
+    override fun verify(clientData: String, keyID: String, callback: (Result<String>) -> Unit) {
+        callback(Result.failure(FlutterError("Unimplemented method")))
+    }
+
 }

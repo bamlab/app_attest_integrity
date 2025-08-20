@@ -68,6 +68,10 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
              }
          }
      }
+    
+    func verify(clientData: String, keyID: String, completion: @escaping (Result<String, Error>) -> Void) {
+        completion(.failure(PigeonError(code: "0", message: "Unimplemented method", details: nil)))
+    }
 }
 
 
