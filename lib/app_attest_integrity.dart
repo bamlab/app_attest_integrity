@@ -79,7 +79,7 @@ class AppAttestIntegrity {
   /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
   /// and [this Android official doc](https://developer.android.com/google/play/integrity/standard)
   /// for more details and implementation instructions.
-  Future<String> verify(String clientData, String keyID) {
+  Future<String> verify({required String clientData, required String keyID}) {
     return AppAttestIntegrityPlatform.instance.verify(clientData, keyID);
   }
 }
