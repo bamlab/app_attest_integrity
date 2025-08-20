@@ -20,13 +20,13 @@ abstract class AppAttestIntegrityApi {
   @async
   void androidPrepareIntegrityServer(int cloudProjectNumber);
   @async
-  GenerateAssertionResponsePigeon? iOSgenerateAttestation(String challenge);
+  GenerateAttestationResponsePigeon? iOSgenerateAttestation(String challenge);
   @async
   String verify(String clientData, String keyID);
 }
 
-class GenerateAssertionResponsePigeon {
-  const GenerateAssertionResponsePigeon({
+class GenerateAttestationResponsePigeon {
+  const GenerateAttestationResponsePigeon({
     required this.attestation,
     required this.keyId,
   });

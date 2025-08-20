@@ -1,5 +1,5 @@
 import 'package:app_attest_integrity/app_attest_integrity_platform_interface.dart';
-import 'package:app_attest_integrity/src/model/generate_assertion_response.dart';
+import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
 
 /// This class is used to assess an app integrity.
 /// Uses App attest on iOS and app Integrity on Android.
@@ -50,7 +50,9 @@ class AppAttestIntegrity {
   /// entropy to ensure guessing them is infeasible.
   ///
   /// Returns null only on Android.
-  Future<GenerateAssertionResponse?> iOSgenerateAttestation(String challenge) {
+  Future<GenerateAttestationResponse?> iOSgenerateAttestation(
+    String challenge,
+  ) {
     return AppAttestIntegrityPlatform.instance.iOSgenerateAttestation(
       challenge,
     );

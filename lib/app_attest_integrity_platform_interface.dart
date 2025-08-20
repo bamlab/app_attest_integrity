@@ -1,5 +1,5 @@
 import 'package:app_attest_integrity/app_attest_integrity_method_channel.dart';
-import 'package:app_attest_integrity/src/model/generate_assertion_response.dart';
+import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 /// Platform interface for the AppAttestIntegrity plugin.
@@ -72,7 +72,9 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
   /// entropy to ensure guessing them is infeasible.
   ///
   /// Returns null only onAndroid.
-  Future<GenerateAssertionResponse?> iOSgenerateAttestation(String challenge) {
+  Future<GenerateAttestationResponse?> iOSgenerateAttestation(
+    String challenge,
+  ) {
     throw UnimplementedError(
       'iOSgenerateAttestation() has not been implemented.',
     );

@@ -2,7 +2,7 @@ package com.theodo.app_attest_integrity
 
 import AppAttestIntegrityApi
 import FlutterError
-import GenerateAssertionResponsePigeon
+import GenerateAttestationResponsePigeon
 import android.content.Context
 import com.google.android.play.core.integrity.IntegrityManagerFactory
 import com.google.android.play.core.integrity.StandardIntegrityManager
@@ -49,7 +49,7 @@ class AppAttestIntegrityPlugin : FlutterPlugin, AppAttestIntegrityApi {
 
     override fun iOSgenerateAttestation(
         challenge: String,
-        callback: (Result<GenerateAssertionResponsePigeon?>) -> Unit
+        callback: (Result<GenerateAttestationResponsePigeon?>) -> Unit
     ) {
         callback(Result.success(null))
     }

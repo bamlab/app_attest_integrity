@@ -22,7 +22,7 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
     
      func iOSgenerateAttestation(
       challenge: String,
-      completion: @escaping (Result<GenerateAssertionResponsePigeon?, Error>) -> Void
+      completion: @escaping (Result<GenerateAttestationResponsePigeon?, Error>) -> Void
      ) {
          // App Attest requires iOS 14+
          guard #available(iOS 14.0, *) else {
@@ -60,7 +60,7 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
                      return
                  }
                  
-                 let response = GenerateAssertionResponsePigeon(
+                 let response = GenerateAttestationResponsePigeon(
                     attestation: attestationObject.base64EncodedString(),
                     keyId: keyId
                  )

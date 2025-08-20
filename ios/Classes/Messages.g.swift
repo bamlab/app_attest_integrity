@@ -129,17 +129,17 @@ func deepHashMessages(value: Any?, hasher: inout Hasher) {
     
 
 /// Generated class from Pigeon that represents data sent in messages.
-struct GenerateAssertionResponsePigeon: Hashable {
+struct GenerateAttestationResponsePigeon: Hashable {
   var attestation: String
   var keyId: String
 
 
   // swift-format-ignore: AlwaysUseLowerCamelCase
-  static func fromList(_ pigeonVar_list: [Any?]) -> GenerateAssertionResponsePigeon? {
+  static func fromList(_ pigeonVar_list: [Any?]) -> GenerateAttestationResponsePigeon? {
     let attestation = pigeonVar_list[0] as! String
     let keyId = pigeonVar_list[1] as! String
 
-    return GenerateAssertionResponsePigeon(
+    return GenerateAttestationResponsePigeon(
       attestation: attestation,
       keyId: keyId
     )
@@ -150,7 +150,7 @@ struct GenerateAssertionResponsePigeon: Hashable {
       keyId,
     ]
   }
-  static func == (lhs: GenerateAssertionResponsePigeon, rhs: GenerateAssertionResponsePigeon) -> Bool {
+  static func == (lhs: GenerateAttestationResponsePigeon, rhs: GenerateAttestationResponsePigeon) -> Bool {
     return deepEqualsMessages(lhs.toList(), rhs.toList())  }
   func hash(into hasher: inout Hasher) {
     deepHashMessages(value: toList(), hasher: &hasher)
@@ -161,7 +161,7 @@ private class MessagesPigeonCodecReader: FlutterStandardReader {
   override func readValue(ofType type: UInt8) -> Any? {
     switch type {
     case 129:
-      return GenerateAssertionResponsePigeon.fromList(self.readValue() as! [Any?])
+      return GenerateAttestationResponsePigeon.fromList(self.readValue() as! [Any?])
     default:
       return super.readValue(ofType: type)
     }
@@ -170,7 +170,7 @@ private class MessagesPigeonCodecReader: FlutterStandardReader {
 
 private class MessagesPigeonCodecWriter: FlutterStandardWriter {
   override func writeValue(_ value: Any) {
-    if let value = value as? GenerateAssertionResponsePigeon {
+    if let value = value as? GenerateAttestationResponsePigeon {
       super.writeByte(129)
       super.writeValue(value.toList())
     } else {
@@ -198,7 +198,7 @@ class MessagesPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 protocol AppAttestIntegrityApi {
   func getPlatformVersion() throws -> String?
   func androidPrepareIntegrityServer(cloudProjectNumber: Int64, completion: @escaping (Result<Void, Error>) -> Void)
-  func iOSgenerateAttestation(challenge: String, completion: @escaping (Result<GenerateAssertionResponsePigeon?, Error>) -> Void)
+  func iOSgenerateAttestation(challenge: String, completion: @escaping (Result<GenerateAttestationResponsePigeon?, Error>) -> Void)
   func verify(clientData: String, keyID: String, completion: @escaping (Result<String, Error>) -> Void)
 }
 

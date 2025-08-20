@@ -78,16 +78,16 @@ class FlutterError (
 ) : Throwable()
 
 /** Generated class from Pigeon that represents data sent in messages. */
-data class GenerateAssertionResponsePigeon (
+data class GenerateAttestationResponsePigeon (
   val attestation: String,
   val keyId: String
 )
  {
   companion object {
-    fun fromList(pigeonVar_list: List<Any?>): GenerateAssertionResponsePigeon {
+    fun fromList(pigeonVar_list: List<Any?>): GenerateAttestationResponsePigeon {
       val attestation = pigeonVar_list[0] as String
       val keyId = pigeonVar_list[1] as String
-      return GenerateAssertionResponsePigeon(attestation, keyId)
+      return GenerateAttestationResponsePigeon(attestation, keyId)
     }
   }
   fun toList(): List<Any?> {
@@ -97,7 +97,7 @@ data class GenerateAssertionResponsePigeon (
     )
   }
   override fun equals(other: Any?): Boolean {
-    if (other !is GenerateAssertionResponsePigeon) {
+    if (other !is GenerateAttestationResponsePigeon) {
       return false
     }
     if (this === other) {
@@ -112,7 +112,7 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
     return when (type) {
       129.toByte() -> {
         return (readValue(buffer) as? List<Any?>)?.let {
-          GenerateAssertionResponsePigeon.fromList(it)
+          GenerateAttestationResponsePigeon.fromList(it)
         }
       }
       else -> super.readValueOfType(type, buffer)
@@ -120,7 +120,7 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
   }
   override fun writeValue(stream: ByteArrayOutputStream, value: Any?)   {
     when (value) {
-      is GenerateAssertionResponsePigeon -> {
+      is GenerateAttestationResponsePigeon -> {
         stream.write(129)
         writeValue(stream, value.toList())
       }
@@ -134,7 +134,7 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
 interface AppAttestIntegrityApi {
   fun getPlatformVersion(): String?
   fun androidPrepareIntegrityServer(cloudProjectNumber: Long, callback: (Result<Unit>) -> Unit)
-  fun iOSgenerateAttestation(challenge: String, callback: (Result<GenerateAssertionResponsePigeon?>) -> Unit)
+  fun iOSgenerateAttestation(challenge: String, callback: (Result<GenerateAttestationResponsePigeon?>) -> Unit)
   fun verify(clientData: String, keyID: String, callback: (Result<String>) -> Unit)
 
   companion object {
@@ -186,7 +186,7 @@ interface AppAttestIntegrityApi {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val challengeArg = args[0] as String
-            api.iOSgenerateAttestation(challengeArg) { result: Result<GenerateAssertionResponsePigeon?> ->
+            api.iOSgenerateAttestation(challengeArg) { result: Result<GenerateAttestationResponsePigeon?> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(MessagesPigeonUtils.wrapError(error))

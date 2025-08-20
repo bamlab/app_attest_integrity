@@ -29,8 +29,8 @@ bool _deepEquals(Object? a, Object? b) {
 }
 
 
-class GenerateAssertionResponsePigeon {
-  GenerateAssertionResponsePigeon({
+class GenerateAttestationResponsePigeon {
+  GenerateAttestationResponsePigeon({
     required this.attestation,
     required this.keyId,
   });
@@ -49,9 +49,9 @@ class GenerateAssertionResponsePigeon {
   Object encode() {
     return _toList();  }
 
-  static GenerateAssertionResponsePigeon decode(Object result) {
+  static GenerateAttestationResponsePigeon decode(Object result) {
     result as List<Object?>;
-    return GenerateAssertionResponsePigeon(
+    return GenerateAttestationResponsePigeon(
       attestation: result[0]! as String,
       keyId: result[1]! as String,
     );
@@ -60,7 +60,7 @@ class GenerateAssertionResponsePigeon {
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) {
-    if (other is! GenerateAssertionResponsePigeon || other.runtimeType != runtimeType) {
+    if (other is! GenerateAttestationResponsePigeon || other.runtimeType != runtimeType) {
       return false;
     }
     if (identical(this, other)) {
@@ -83,7 +83,7 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is int) {
       buffer.putUint8(4);
       buffer.putInt64(value);
-    }    else if (value is GenerateAssertionResponsePigeon) {
+    }    else if (value is GenerateAttestationResponsePigeon) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
     } else {
@@ -95,7 +95,7 @@ class _PigeonCodec extends StandardMessageCodec {
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
       case 129: 
-        return GenerateAssertionResponsePigeon.decode(readValue(buffer)!);
+        return GenerateAttestationResponsePigeon.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }
@@ -161,7 +161,7 @@ class AppAttestIntegrityApi {
     }
   }
 
-  Future<GenerateAssertionResponsePigeon?> iOSgenerateAttestation(String challenge) async {
+  Future<GenerateAttestationResponsePigeon?> iOSgenerateAttestation(String challenge) async {
     final String pigeonVar_channelName = 'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.iOSgenerateAttestation$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
@@ -180,7 +180,7 @@ class AppAttestIntegrityApi {
         details: pigeonVar_replyList[2],
       );
     } else {
-      return (pigeonVar_replyList[0] as GenerateAssertionResponsePigeon?);
+      return (pigeonVar_replyList[0] as GenerateAttestationResponsePigeon?);
     }
   }
 

@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
 /// for more details.
 ///
-class GenerateAssertionResponse {
+class GenerateAttestationResponse {
   /// Response of the [AppAttestIntegrity.iOSgenerateAttestation] method.
   /// It should be sent to the server, as [attestation] acts as a public key,
   /// and [keyId] is useful to check the [attestation] is valid on server side.
@@ -16,7 +16,7 @@ class GenerateAssertionResponse {
   /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
   /// for more details.
   ///
-  const GenerateAssertionResponse({
+  const GenerateAttestationResponse({
     required this.attestation,
     required this.keyId,
   });
@@ -41,7 +41,7 @@ class GenerateAssertionResponse {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is GenerateAssertionResponse &&
+    return other is GenerateAttestationResponse &&
         other.attestation == attestation &&
         other.keyId == keyId;
   }

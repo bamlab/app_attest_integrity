@@ -1,6 +1,6 @@
 import 'package:app_attest_integrity/app_attest_integrity_platform_interface.dart';
 import 'package:app_attest_integrity/src/messages.g.dart';
-import 'package:app_attest_integrity/src/model/generate_assertion_response.dart';
+import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -24,7 +24,7 @@ class MethodChannelAppAttestIntegrity extends AppAttestIntegrityPlatform {
   }
 
   @override
-  Future<GenerateAssertionResponse?> iOSgenerateAttestation(
+  Future<GenerateAttestationResponse?> iOSgenerateAttestation(
     String challenge,
   ) async {
     final response = await AppAttestIntegrityApi().iOSgenerateAttestation(
@@ -33,7 +33,7 @@ class MethodChannelAppAttestIntegrity extends AppAttestIntegrityPlatform {
     if (response == null) {
       return null;
     }
-    return GenerateAssertionResponse(
+    return GenerateAttestationResponse(
       attestation: response.attestation,
       keyId: response.keyId,
     );
