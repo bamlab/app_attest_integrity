@@ -193,11 +193,12 @@ class MessagesPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
   static let shared = MessagesPigeonCodec(readerWriter: MessagesPigeonCodecReaderWriter())
 }
 
+
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol AppAttestIntegrityApi {
   func getPlatformVersion() throws -> String?
-  func androidPrepareIntegrityServer(cloudProjectNumber: Int64) throws
-  func iOSgenerateAttestation(challenge: String) throws -> GenerateAssertionResponsePigeon?
+  func androidPrepareIntegrityServer(cloudProjectNumber: Int64, completion: @escaping (Result<Void, Error>) -> Void)
+  func iOSgenerateAttestation(challenge: String, completion: @escaping (Result<GenerateAssertionResponsePigeon?, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -224,11 +225,13 @@ class AppAttestIntegrityApiSetup {
       androidPrepareIntegrityServerChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let cloudProjectNumberArg = args[0] as! Int64
-        do {
-          try api.androidPrepareIntegrityServer(cloudProjectNumber: cloudProjectNumberArg)
-          reply(wrapResult(nil))
-        } catch {
-          reply(wrapError(error))
+        api.androidPrepareIntegrityServer(cloudProjectNumber: cloudProjectNumberArg) { result in
+          switch result {
+          case .success:
+            reply(wrapResult(nil))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
         }
       }
     } else {
@@ -239,11 +242,13 @@ class AppAttestIntegrityApiSetup {
       iOSgenerateAttestationChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let challengeArg = args[0] as! String
-        do {
-          let result = try api.iOSgenerateAttestation(challenge: challengeArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
+        api.iOSgenerateAttestation(challenge: challengeArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
         }
       }
     } else {

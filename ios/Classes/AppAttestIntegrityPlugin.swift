@@ -13,7 +13,6 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
            return "iOS " + UIDevice.current.systemVersion
        }
     
-    public func androidPrepareIntegrityServer(cloudProjectNumber: Int64) {
-        return
+    public func androidPrepareIntegrityServer(cloudProjectNumber: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
+        completion(.success(<#T##Void#>))
     }
-}

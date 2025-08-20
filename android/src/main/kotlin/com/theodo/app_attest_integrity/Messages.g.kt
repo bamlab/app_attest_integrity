@@ -129,11 +129,12 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
   }
 }
 
+
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface AppAttestIntegrityApi {
   fun getPlatformVersion(): String?
-  fun androidPrepareIntegrityServer(cloudProjectNumber: Long)
-  fun iOSgenerateAttestation(challenge: String): GenerateAssertionResponsePigeon?
+  fun androidPrepareIntegrityServer(cloudProjectNumber: Long, callback: (Result<Unit>) -> Unit)
+  fun iOSgenerateAttestation(challenge: String, callback: (Result<GenerateAssertionResponsePigeon?>) -> Unit)
 
   companion object {
     /** The codec used by AppAttestIntegrityApi. */
@@ -165,13 +166,14 @@ interface AppAttestIntegrityApi {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val cloudProjectNumberArg = args[0] as Long
-            val wrapped: List<Any?> = try {
-              api.androidPrepareIntegrityServer(cloudProjectNumberArg)
-              listOf(null)
-            } catch (exception: Throwable) {
-              MessagesPigeonUtils.wrapError(exception)
+            api.androidPrepareIntegrityServer(cloudProjectNumberArg) { result: Result<Unit> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(MessagesPigeonUtils.wrapError(error))
+              } else {
+                reply.reply(MessagesPigeonUtils.wrapResult(null))
+              }
             }
-            reply.reply(wrapped)
           }
         } else {
           channel.setMessageHandler(null)
@@ -183,12 +185,15 @@ interface AppAttestIntegrityApi {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val challengeArg = args[0] as String
-            val wrapped: List<Any?> = try {
-              listOf(api.iOSgenerateAttestation(challengeArg))
-            } catch (exception: Throwable) {
-              MessagesPigeonUtils.wrapError(exception)
+            api.iOSgenerateAttestation(challengeArg) { result: Result<GenerateAssertionResponsePigeon?> ->
+              val error = result.exceptionOrNull()
+              if (error != null) {
+                reply.reply(MessagesPigeonUtils.wrapError(error))
+              } else {
+                val data = result.getOrNull()
+                reply.reply(MessagesPigeonUtils.wrapResult(data))
+              }
             }
-            reply.reply(wrapped)
           }
         } else {
           channel.setMessageHandler(null)
