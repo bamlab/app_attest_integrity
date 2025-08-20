@@ -64,6 +64,8 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
   /// The challenge should be at least 16 bytes in length to ensure sufficient
   /// entropy to ensure guessing them is infeasible.
   ///
+  /// This method will throw if used on an unsupported iOS device.
+  ///
   /// Returns null only onAndroid.
   Future<GenerateAttestationResponse?> iOSgenerateAttestation(
     String challenge,
@@ -90,6 +92,8 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
   ///
   /// Returns the signature of the client data, to be sent to the server along
   /// with the client data.
+  ///
+  ///  This method will throw if used on an unsupported device.
   ///
   /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
   /// and [this Android official doc](https://developer.android.com/google/play/integrity/standard)
