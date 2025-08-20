@@ -48,4 +48,9 @@ class GenerateAssertionResponse {
 
   @override
   int get hashCode => attestation.hashCode ^ keyId.hashCode;
+
+  @override
+  String toString() {
+    return 'Response(attestation: $attestation, keyId: $keyId)';
+  }
 }
