@@ -77,4 +77,31 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
       'iOSgenerateAttestation() has not been implemented.',
     );
   }
+
+  /// Use this method to sign your data in a way that can prove the integrity
+  /// of the app on the server side.
+  ///
+  /// On android, [androidPrepareIntegrityServer] should be called
+  /// on a non critical path before using this method,
+  /// otherwise the Future might take several seconds to complete. See the [doc](https://developer.android.com/google/play/integrity/standard)
+  ///
+  /// On iOS, [iOSgenerateAttestation] should be have been called once
+  /// for the user before using this method, otherwise the method will fail.
+  ///
+  /// [clientData] is the client data to secure, in the form of a JSON string.
+  /// It should contain a nonce or a challenge to avoid replay attacks.
+  ///
+  /// [keyID] is used on iOS only to retrieve the private key stored by the OS.
+  ///
+  /// Returns the signature of the client data, to be sent to the server along
+  /// with the client data.
+  ///
+  /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
+  /// and [this Android official doc](https://developer.android.com/google/play/integrity/standard)
+  /// for more details and implementation instructions.
+  Future<String> verify(String clientData, String keyID) {
+    throw UnimplementedError(
+      'iOSgenerateAttestation() has not been implemented.',
+    );
+  }
 }
