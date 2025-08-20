@@ -66,12 +66,19 @@ class AppAttestIntegrity {
   /// otherwise the Future might take several seconds to complete. See the [doc](https://developer.android.com/google/play/integrity/standard)
   ///
   /// On iOS, [iOSgenerateAttestation] should be have been called once
-  /// for the user before using this method, otherwise the method will fail. See the [doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
+  /// for the user before using this method, o therwise the method will fail. See the [doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
   ///
   /// [clientData] is the client data to secure, in the form of a JSON string.
   /// It should contain a nonce or a challenge to avoid replay attacks.
   ///
   /// [keyID] is used on iOS only to retrieve the private key stored by the OS.
+  ///
+  /// [cloudProjectNumber] is used on android only to set
+  /// the cloud project number.
+  /// It can be found in the Google Play Console.
+  /// If not provided, the method will use the cloud project number set by
+  /// [androidPrepareIntegrityServer]. If [androidPrepareIntegrityServer]
+  /// was not called, the method will throw an error.
   ///
   /// Returns the signature of the client data, to be sent to the server along
   /// with the client data.
@@ -79,7 +86,15 @@ class AppAttestIntegrity {
   /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
   /// and [this Android official doc](https://developer.android.com/google/play/integrity/standard)
   /// for more details and implementation instructions.
-  Future<String> verify({required String clientData, required String keyID}) {
-    return AppAttestIntegrityPlatform.instance.verify(clientData, keyID);
+  Future<String> verify({
+    required String clientData,
+    required String keyID,
+    int? cloudProjectNumber,
+  }) {
+    return AppAttestIntegrityPlatform.instance.verify(
+      clientData: clientData,
+      keyID: keyID,
+      cloudProjectNumber: cloudProjectNumber,
+    );
   }
 }

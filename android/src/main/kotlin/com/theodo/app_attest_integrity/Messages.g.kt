@@ -135,7 +135,7 @@ interface AppAttestIntegrityApi {
   fun getPlatformVersion(): String?
   fun androidPrepareIntegrityServer(cloudProjectNumber: Long, callback: (Result<Unit>) -> Unit)
   fun iOSgenerateAttestation(challenge: String, callback: (Result<GenerateAttestationResponsePigeon?>) -> Unit)
-  fun verify(clientData: String, keyID: String, callback: (Result<String>) -> Unit)
+  fun verify(clientData: String, keyID: String, cloudProjectNumber: Long?, callback: (Result<String>) -> Unit)
 
   companion object {
     /** The codec used by AppAttestIntegrityApi. */
@@ -207,7 +207,8 @@ interface AppAttestIntegrityApi {
             val args = message as List<Any?>
             val clientDataArg = args[0] as String
             val keyIDArg = args[1] as String
-            api.verify(clientDataArg, keyIDArg) { result: Result<String> ->
+            val cloudProjectNumberArg = args[2] as Long?
+            api.verify(clientDataArg, keyIDArg, cloudProjectNumberArg) { result: Result<String> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(MessagesPigeonUtils.wrapError(error))

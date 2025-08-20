@@ -70,7 +70,7 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
      }
     
 
-    func verify(clientData: String, keyID: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func verify(clientData: String, keyID: String, cloudProjectNumber:Int64?, completion: @escaping (Result<String, Error>) -> Void) {
       
         guard #available(iOS 14.0, *) else {
         completion(.failure(PigeonError(code: "unavailable", message: "App Attest requires iOS 14.0+", details: nil)))

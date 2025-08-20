@@ -22,7 +22,11 @@ abstract class AppAttestIntegrityApi {
   @async
   GenerateAttestationResponsePigeon? iOSgenerateAttestation(String challenge);
   @async
-  String verify(String clientData, String keyID);
+  String verify({
+    required String clientData,
+    required String keyID,
+    int? cloudProjectNumber,
+  });
 }
 
 class GenerateAttestationResponsePigeon {

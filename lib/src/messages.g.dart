@@ -184,14 +184,14 @@ class AppAttestIntegrityApi {
     }
   }
 
-  Future<String> verify(String clientData, String keyID) async {
+  Future<String> verify({required String clientData, required String keyID, int? cloudProjectNumber, }) async {
     final String pigeonVar_channelName = 'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.verify$pigeonVar_messageChannelSuffix';
     final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
     );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(<Object?>[clientData, keyID]);
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(<Object?>[clientData, keyID, cloudProjectNumber]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
