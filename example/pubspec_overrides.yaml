@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: app_attest_integrity
+dependency_overrides:
+  app_attest_integrity:
+    path: ..

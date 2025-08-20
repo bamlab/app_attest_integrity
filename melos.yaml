@@ -2,6 +2,7 @@ name: app_attest_integrity
 
 packages:
   - .
+  - example
 
 
 scripts:
