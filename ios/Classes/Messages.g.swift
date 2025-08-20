@@ -196,7 +196,6 @@ class MessagesPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol AppAttestIntegrityApi {
-  func getPlatformVersion() throws -> String?
   func androidPrepareIntegrityServer(cloudProjectNumber: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   func iOSgenerateAttestation(challenge: String, completion: @escaping (Result<GenerateAttestationResponsePigeon?, Error>) -> Void)
   func verify(clientData: String, keyID: String, cloudProjectNumber: Int64?, completion: @escaping (Result<String, Error>) -> Void)
@@ -208,19 +207,6 @@ class AppAttestIntegrityApiSetup {
   /// Sets up an instance of `AppAttestIntegrityApi` to handle messages through the `binaryMessenger`.
   static func setUp(binaryMessenger: FlutterBinaryMessenger, api: AppAttestIntegrityApi?, messageChannelSuffix: String = "") {
     let channelSuffix = messageChannelSuffix.count > 0 ? ".\(messageChannelSuffix)" : ""
-    let getPlatformVersionChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.getPlatformVersion\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
-    if let api = api {
-      getPlatformVersionChannel.setMessageHandler { _, reply in
-        do {
-          let result = try api.getPlatformVersion()
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
-        }
-      }
-    } else {
-      getPlatformVersionChannel.setMessageHandler(nil)
-    }
     let androidPrepareIntegrityServerChannel = FlutterBasicMessageChannel(name: "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.androidPrepareIntegrityServer\(channelSuffix)", binaryMessenger: binaryMessenger, codec: codec)
     if let api = api {
       androidPrepareIntegrityServerChannel.setMessageHandler { message, reply in

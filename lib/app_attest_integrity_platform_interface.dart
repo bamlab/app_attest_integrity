@@ -30,13 +30,6 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
     _instance = value;
   }
 
-  /// Get the platform version.
-  ///
-  /// This a hello world method, will be removed later.
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
-  }
-
   /// [Android only]<br/>
   /// Warm up the integrity API server.
   ///

@@ -12,10 +12,6 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
       AppAttestIntegrityApiSetup.setUp(binaryMessenger: messenger, api: api)
     }
 
-    public func getPlatformVersion() throws -> String? {
-           return "iOS " + UIDevice.current.systemVersion
-    }
-    
     public func androidPrepareIntegrityServer(cloudProjectNumber: Int64, completion: @escaping (Result<Void, Error>) -> Void) {
         completion(.success(Void()))
     }

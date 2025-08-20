@@ -8,13 +8,6 @@ class AppAttestIntegrity {
   /// Uses App attest on iOS and app Integrity on Android.
   const AppAttestIntegrity();
 
-  /// Get the platform version.
-  ///
-  /// This a hello world method, will be removed later.
-  Future<String?> getPlatformVersion() {
-    return AppAttestIntegrityPlatform.instance.getPlatformVersion();
-  }
-
   /// [Android only]<br/>
   /// Warm up the integrity API server.
   ///

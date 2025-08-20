@@ -132,7 +132,6 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
 
 /** Generated interface from Pigeon that represents a handler of messages from Flutter. */
 interface AppAttestIntegrityApi {
-  fun getPlatformVersion(): String?
   fun androidPrepareIntegrityServer(cloudProjectNumber: Long, callback: (Result<Unit>) -> Unit)
   fun iOSgenerateAttestation(challenge: String, callback: (Result<GenerateAttestationResponsePigeon?>) -> Unit)
   fun verify(clientData: String, keyID: String, cloudProjectNumber: Long?, callback: (Result<String>) -> Unit)
@@ -146,21 +145,6 @@ interface AppAttestIntegrityApi {
     @JvmOverloads
     fun setUp(binaryMessenger: BinaryMessenger, api: AppAttestIntegrityApi?, messageChannelSuffix: String = "") {
       val separatedMessageChannelSuffix = if (messageChannelSuffix.isNotEmpty()) ".$messageChannelSuffix" else ""
-      run {
-        val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.getPlatformVersion$separatedMessageChannelSuffix", codec)
-        if (api != null) {
-          channel.setMessageHandler { _, reply ->
-            val wrapped: List<Any?> = try {
-              listOf(api.getPlatformVersion())
-            } catch (exception: Throwable) {
-              MessagesPigeonUtils.wrapError(exception)
-            }
-            reply.reply(wrapped)
-          }
-        } else {
-          channel.setMessageHandler(null)
-        }
-      }
       run {
         val channel = BasicMessageChannel<Any?>(binaryMessenger, "dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.androidPrepareIntegrityServer$separatedMessageChannelSuffix", codec)
         if (api != null) {

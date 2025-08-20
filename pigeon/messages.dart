@@ -16,7 +16,6 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract class AppAttestIntegrityApi {
-  String? getPlatformVersion();
   @async
   void androidPrepareIntegrityServer(int cloudProjectNumber);
   @async

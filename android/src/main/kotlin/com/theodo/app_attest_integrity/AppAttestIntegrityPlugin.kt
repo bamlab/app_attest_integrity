@@ -34,9 +34,7 @@ class AppAttestIntegrityPlugin : FlutterPlugin, AppAttestIntegrityApi {
         integrityTokenProvider = null
         cloudProjectNumber = null
     }
-
-    override fun getPlatformVersion(): String = "Android ${android.os.Build.VERSION.RELEASE}"
-
+    
     override fun androidPrepareIntegrityServer(
         cloudProjectNumber: Long, callback: (Result<Unit>) -> Unit
     ) {
