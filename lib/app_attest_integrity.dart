@@ -56,12 +56,19 @@ class AppAttestIntegrity {
   /// Use this method to sign your data in a way that can prove the integrity
   /// of the app on the server side.
   ///
+  /// Returns the signature of the client data, to be sent to the server along
+  /// with the client data.
+  ///
+  /// This method will throw if used on an unsupported device.
+  ///
   /// On android, [androidPrepareIntegrityServer] should be called
   /// on a non critical path before using this method,
   /// otherwise the Future might take several seconds to complete. See the [doc](https://developer.android.com/google/play/integrity/standard)
   ///
   /// On iOS, [iOSgenerateAttestation] should be have been called once
   /// for the user before using this method, o therwise the method will fail. See the [doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
+  ///
+  /// Parameters:
   ///
   /// [clientData] is the client data to secure, in the form of a JSON string.
   /// It should contain a nonce or a challenge to avoid replay attacks.
@@ -77,10 +84,7 @@ class AppAttestIntegrity {
   /// [androidPrepareIntegrityServer]. If [androidPrepareIntegrityServer]
   /// was not called, the method will throw an error.
   ///
-  /// Returns the signature of the client data, to be sent to the server along
-  /// with the client data.
-  ///
-  /// This method will throw if used on an unsupported device.
+  /// Official docs:
   ///
   /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
   /// and [this Android official doc](https://developer.android.com/google/play/integrity/standard)
