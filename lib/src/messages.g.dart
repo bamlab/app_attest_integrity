@@ -14,20 +14,24 @@ PlatformException _createConnectionError(String channelName) {
     message: 'Unable to establish connection on channel: "$channelName".',
   );
 }
+
 bool _deepEquals(Object? a, Object? b) {
   if (a is List && b is List) {
     return a.length == b.length &&
-        a.indexed
-        .every(((int, dynamic) item) => _deepEquals(item.$2, b[item.$1]));
+        a.indexed.every(
+          ((int, dynamic) item) => _deepEquals(item.$2, b[item.$1]),
+        );
   }
   if (a is Map && b is Map) {
-    return a.length == b.length && a.entries.every((MapEntry<Object?, Object?> entry) =>
-        (b as Map<Object?, Object?>).containsKey(entry.key) &&
-        _deepEquals(entry.value, b[entry.key]));
+    return a.length == b.length &&
+        a.entries.every(
+          (MapEntry<Object?, Object?> entry) =>
+              (b as Map<Object?, Object?>).containsKey(entry.key) &&
+              _deepEquals(entry.value, b[entry.key]),
+        );
   }
   return a == b;
 }
-
 
 class GenerateAttestationResponsePigeon {
   GenerateAttestationResponsePigeon({
@@ -40,14 +44,12 @@ class GenerateAttestationResponsePigeon {
   String keyId;
 
   List<Object?> _toList() {
-    return <Object?>[
-      attestation,
-      keyId,
-    ];
+    return <Object?>[attestation, keyId];
   }
 
   Object encode() {
-    return _toList();  }
+    return _toList();
+  }
 
   static GenerateAttestationResponsePigeon decode(Object result) {
     result as List<Object?>;
@@ -60,7 +62,8 @@ class GenerateAttestationResponsePigeon {
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object other) {
-    if (other is! GenerateAttestationResponsePigeon || other.runtimeType != runtimeType) {
+    if (other is! GenerateAttestationResponsePigeon ||
+        other.runtimeType != runtimeType) {
       return false;
     }
     if (identical(this, other)) {
@@ -71,10 +74,8 @@ class GenerateAttestationResponsePigeon {
 
   @override
   // ignore: avoid_equals_and_hash_code_on_mutable_classes
-  int get hashCode => Object.hashAll(_toList())
-;
+  int get hashCode => Object.hashAll(_toList());
 }
-
 
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
@@ -83,7 +84,7 @@ class _PigeonCodec extends StandardMessageCodec {
     if (value is int) {
       buffer.putUint8(4);
       buffer.putInt64(value);
-    }    else if (value is GenerateAttestationResponsePigeon) {
+    } else if (value is GenerateAttestationResponsePigeon) {
       buffer.putUint8(129);
       writeValue(buffer, value.encode());
     } else {
@@ -94,7 +95,7 @@ class _PigeonCodec extends StandardMessageCodec {
   @override
   Object? readValueOfType(int type, ReadBuffer buffer) {
     switch (type) {
-      case 129: 
+      case 129:
         return GenerateAttestationResponsePigeon.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
@@ -106,9 +107,13 @@ class AppAttestIntegrityApi {
   /// Constructor for [AppAttestIntegrityApi].  The [binaryMessenger] named argument is
   /// available for dependency injection.  If it is left null, the default
   /// BinaryMessenger will be used which routes to the host platform.
-  AppAttestIntegrityApi({BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
-      : pigeonVar_binaryMessenger = binaryMessenger,
-        pigeonVar_messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+  AppAttestIntegrityApi({
+    BinaryMessenger? binaryMessenger,
+    String messageChannelSuffix = '',
+  }) : pigeonVar_binaryMessenger = binaryMessenger,
+       pigeonVar_messageChannelSuffix = messageChannelSuffix.isNotEmpty
+           ? '.$messageChannelSuffix'
+           : '';
   final BinaryMessenger? pigeonVar_binaryMessenger;
 
   static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
@@ -116,13 +121,17 @@ class AppAttestIntegrityApi {
   final String pigeonVar_messageChannelSuffix;
 
   Future<void> androidPrepareIntegrityServer(int cloudProjectNumber) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.androidPrepareIntegrityServer$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.androidPrepareIntegrityServer$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
+      <Object?>[cloudProjectNumber],
     );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(<Object?>[cloudProjectNumber]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
@@ -138,14 +147,20 @@ class AppAttestIntegrityApi {
     }
   }
 
-  Future<GenerateAttestationResponsePigeon?> iOSgenerateAttestation(String challenge) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.iOSgenerateAttestation$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
+  Future<GenerateAttestationResponsePigeon?> iOSgenerateAttestation(
+    String challenge,
+  ) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.iOSgenerateAttestation$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
+      <Object?>[challenge],
     );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(<Object?>[challenge]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
@@ -161,14 +176,22 @@ class AppAttestIntegrityApi {
     }
   }
 
-  Future<String> verify({required String clientData, String? iOSkeyID, int? androidCloudProjectNumber, }) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.verify$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
-      pigeonVar_channelName,
-      pigeonChannelCodec,
-      binaryMessenger: pigeonVar_binaryMessenger,
+  Future<String> verify({
+    required String clientData,
+    String? iOSkeyID,
+    int? androidCloudProjectNumber,
+  }) async {
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.app_attest_integrity.AppAttestIntegrityApi.verify$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
+          pigeonVar_channelName,
+          pigeonChannelCodec,
+          binaryMessenger: pigeonVar_binaryMessenger,
+        );
+    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(
+      <Object?>[clientData, iOSkeyID, androidCloudProjectNumber],
     );
-    final Future<Object?> pigeonVar_sendFuture = pigeonVar_channel.send(<Object?>[clientData, iOSkeyID, androidCloudProjectNumber]);
     final List<Object?>? pigeonVar_replyList =
         await pigeonVar_sendFuture as List<Object?>?;
     if (pigeonVar_replyList == null) {
