@@ -8,6 +8,7 @@ class AppAttestIntegrity {
   /// Uses App attest on iOS and app Integrity on Android.
   const AppAttestIntegrity();
 
+  /// {@template androidPrepareIntegrityServer}
   /// [Android only]<br/>
   /// Warm up the integrity API server.
   ///
@@ -21,12 +22,14 @@ class AppAttestIntegrity {
   /// It can be found in the Google Play Console.
   ///
   /// This method will do nothing on iOS.
+  /// {@endtemplate}
   Future<void> androidPrepareIntegrityServer(int cloudProjectNumber) {
     return AppAttestIntegrityPlatform.instance.androidPrepareIntegrityServer(
       cloudProjectNumber,
     );
   }
 
+  /// {@template iOSgenerateAttestation}
   /// [iOS only]<br/>
   /// Creates a key pair and verifies it using the [challenge],
   /// which creates an attestation.
@@ -45,6 +48,7 @@ class AppAttestIntegrity {
   /// This method will throw if used on an unsupported iOS device.
   ///
   /// Returns null only when used on Android.
+  /// {@endtemplate}
   Future<GenerateAttestationResponse?> iOSgenerateAttestation(
     String challenge,
   ) {
@@ -53,6 +57,7 @@ class AppAttestIntegrity {
     );
   }
 
+  /// {@template verify}
   /// Use this method to sign your data in a way that can prove the integrity
   /// of the app on the server side.
   ///
@@ -89,6 +94,7 @@ class AppAttestIntegrity {
   /// See [this iOS official doc](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity)
   /// and [this Android official doc](https://developer.android.com/google/play/integrity/standard)
   /// for more details and implementation instructions.
+  /// {@endtemplate}
   Future<String> verify({
     required String clientData,
     String? iOSkeyID,
