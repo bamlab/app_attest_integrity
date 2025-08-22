@@ -198,7 +198,7 @@ class MessagesPigeonCodec: FlutterStandardMessageCodec, @unchecked Sendable {
 protocol AppAttestIntegrityApi {
   func androidPrepareIntegrityServer(cloudProjectNumber: Int64, completion: @escaping (Result<Void, Error>) -> Void)
   func iOSgenerateAttestation(challenge: String, completion: @escaping (Result<GenerateAttestationResponsePigeon?, Error>) -> Void)
-  func verify(clientData: String, keyID: String, cloudProjectNumber: Int64?, completion: @escaping (Result<String, Error>) -> Void)
+  func verify(clientData: String, iOSkeyID: String?, androidCloudProjectNumber: Int64?, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -246,9 +246,9 @@ class AppAttestIntegrityApiSetup {
       verifyChannel.setMessageHandler { message, reply in
         let args = message as! [Any?]
         let clientDataArg = args[0] as! String
-        let keyIDArg = args[1] as! String
-        let cloudProjectNumberArg: Int64? = nilOrValue(args[2])
-        api.verify(clientData: clientDataArg, keyID: keyIDArg, cloudProjectNumber: cloudProjectNumberArg) { result in
+        let iOSkeyIDArg: String? = nilOrValue(args[1])
+        let androidCloudProjectNumberArg: Int64? = nilOrValue(args[2])
+        api.verify(clientData: clientDataArg, iOSkeyID: iOSkeyIDArg, androidCloudProjectNumber: androidCloudProjectNumberArg) { result in
           switch result {
           case .success(let res):
             reply(wrapResult(res))

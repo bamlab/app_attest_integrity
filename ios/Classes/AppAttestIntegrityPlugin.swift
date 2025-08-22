@@ -66,7 +66,7 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
      }
     
 
-    func verify(clientData: String, keyID: String, cloudProjectNumber:Int64?, completion: @escaping (Result<String, Error>) -> Void) {
+    func verify(clientData: String, iOSkeyID: String?, androidCloudProjectNumber:Int64?, completion: @escaping (Result<String, Error>) -> Void) {
       
         guard #available(iOS 14.0, *) else {
         completion(.failure(PigeonError(code: "unavailable", message: "App Attest requires iOS 14.0+", details: nil)))
@@ -77,6 +77,10 @@ public class AppAttestIntegrityPlugin: NSObject, FlutterPlugin, AppAttestIntegri
         guard service.isSupported else {
         completion(.failure(PigeonError(code: "unsupported", message: "App Attest is not supported on this device.", details: nil)))
         return
+        }
+        guard let keyID = iOSkeyID else {
+            completion(.failure(PigeonError(code: "missing keyID", message: "keyID is needed on iOS to generate the assertion", details: nil)))
+            return
         }
 
         let clientDataHash = Data(SHA256.hash(data: Data(clientData.utf8)))

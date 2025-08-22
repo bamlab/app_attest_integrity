@@ -66,9 +66,11 @@ class AppAttestIntegrity {
   /// [clientData] is the client data to secure, in the form of a JSON string.
   /// It should contain a nonce or a challenge to avoid replay attacks.
   ///
-  /// [keyID] is used on iOS only to retrieve the private key stored by the OS.
+  /// [iOSkeyID] is used and required on iOS only to retrieve the private key
+  /// stored by the OS. If you don't provide it and call the method on iOS,
+  /// the method will throw an error.
   ///
-  /// [cloudProjectNumber] is used on android only to set
+  /// [androidCloudProjectNumber] is used on android only to set
   /// the cloud project number.
   /// It can be found in the Google Play Console.
   /// If not provided, the method will use the cloud project number set by
@@ -85,13 +87,13 @@ class AppAttestIntegrity {
   /// for more details and implementation instructions.
   Future<String> verify({
     required String clientData,
-    required String keyID,
-    int? cloudProjectNumber,
+    String? iOSkeyID,
+    int? androidCloudProjectNumber,
   }) {
     return AppAttestIntegrityPlatform.instance.verify(
       clientData: clientData,
-      keyID: keyID,
-      cloudProjectNumber: cloudProjectNumber,
+      iOSkeyID: iOSkeyID,
+      androidCloudProjectNumber: androidCloudProjectNumber,
     );
   }
 }

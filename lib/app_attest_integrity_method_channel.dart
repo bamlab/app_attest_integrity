@@ -31,13 +31,13 @@ class MethodChannelAppAttestIntegrity extends AppAttestIntegrityPlatform {
   @override
   Future<String> verify({
     required String clientData,
-    required String keyID,
-    int? cloudProjectNumber,
+    String? iOSkeyID,
+    int? androidCloudProjectNumber,
   }) {
     return AppAttestIntegrityApi().verify(
       clientData: clientData,
-      keyID: keyID,
-      cloudProjectNumber: cloudProjectNumber,
+      iOSkeyID: iOSkeyID,
+      androidCloudProjectNumber: androidCloudProjectNumber,
     );
   }
 }

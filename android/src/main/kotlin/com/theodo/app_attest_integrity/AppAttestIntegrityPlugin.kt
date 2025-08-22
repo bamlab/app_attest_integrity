@@ -54,13 +54,13 @@ class AppAttestIntegrityPlugin : FlutterPlugin, AppAttestIntegrityApi {
 
     override fun verify(
         clientData: String,
-        keyID: String,
-        cloudProjectNumber: Long?,
+        iOSkeyID: String?,
+        androidCloudProjectNumber: Long?,
         callback: (Result<String>) -> Unit
     ) {
         val provider = integrityTokenProvider
         if (provider == null) {
-            if (cloudProjectNumber == null) {
+            if (androidCloudProjectNumber == null) {
                 callback(
                     Result.failure(
                         FlutterError(
@@ -74,7 +74,7 @@ class AppAttestIntegrityPlugin : FlutterPlugin, AppAttestIntegrityApi {
                 )
                 return
             }
-            getProvider(cloudProjectNumber) {
+            getProvider(androidCloudProjectNumber) {
                 it.onSuccess { provider ->
                     integrityTokenProvider = provider
                     getToken(provider, clientData, callback)

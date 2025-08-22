@@ -23,8 +23,8 @@ abstract class AppAttestIntegrityApi {
   @async
   String verify({
     required String clientData,
-    required String keyID,
-    int? cloudProjectNumber,
+    String? iOSkeyID,
+    int? androidCloudProjectNumber,
   });
 }
 

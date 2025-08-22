@@ -134,7 +134,7 @@ private open class MessagesPigeonCodec : StandardMessageCodec() {
 interface AppAttestIntegrityApi {
   fun androidPrepareIntegrityServer(cloudProjectNumber: Long, callback: (Result<Unit>) -> Unit)
   fun iOSgenerateAttestation(challenge: String, callback: (Result<GenerateAttestationResponsePigeon?>) -> Unit)
-  fun verify(clientData: String, keyID: String, cloudProjectNumber: Long?, callback: (Result<String>) -> Unit)
+  fun verify(clientData: String, iOSkeyID: String?, androidCloudProjectNumber: Long?, callback: (Result<String>) -> Unit)
 
   companion object {
     /** The codec used by AppAttestIntegrityApi. */
@@ -190,9 +190,9 @@ interface AppAttestIntegrityApi {
           channel.setMessageHandler { message, reply ->
             val args = message as List<Any?>
             val clientDataArg = args[0] as String
-            val keyIDArg = args[1] as String
-            val cloudProjectNumberArg = args[2] as Long?
-            api.verify(clientDataArg, keyIDArg, cloudProjectNumberArg) { result: Result<String> ->
+            val iOSkeyIDArg = args[1] as String?
+            val androidCloudProjectNumberArg = args[2] as Long?
+            api.verify(clientDataArg, iOSkeyIDArg, androidCloudProjectNumberArg) { result: Result<String> ->
               val error = result.exceptionOrNull()
               if (error != null) {
                 reply.reply(MessagesPigeonUtils.wrapError(error))

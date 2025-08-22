@@ -79,7 +79,8 @@ class _MyAppState extends State<MyApp> {
                 final clientDataBase64 = base64Encode(utf8.encode(clientData));
                 try {
                   final keyID = _keyID;
-                  if (keyID == null) {
+                  if (defaultTargetPlatform == TargetPlatform.iOS &&
+                      keyID == null) {
                     print(
                       'There is no keyID yet. Tap on the button above first.',
                     );
@@ -87,7 +88,7 @@ class _MyAppState extends State<MyApp> {
                   }
                   final assertion = await AppAttestIntegrity().verify(
                     clientData: clientDataBase64,
-                    keyID: keyID,
+                    iOSkeyID: keyID,
                   );
                   print("--------------------------------");
                   print("assertion: $assertion");
