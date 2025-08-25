@@ -37,4 +37,4 @@ jobs:
         run: flutter analyze lib && dart format --set-exit-if-changed lib
 
       - name: Publish to pub.dev
-        run: flutter pub publish --dry-run
+        run: flutter pub publish --force
