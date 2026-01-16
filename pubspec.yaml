@@ -27,7 +27,6 @@ dev_dependencies:
     sdk: flutter
   jnigen: ^0.15.0
   melos: ^6.3.3
-  pigeon: ^26.0.1
   theodo_analysis: ^1.5.0
 
 flutter:
