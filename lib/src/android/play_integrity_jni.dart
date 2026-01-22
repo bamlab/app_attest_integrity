@@ -62,7 +62,21 @@ class PlayIntegrityJni {
             ?.setCloudProjectNumber(cloudProjectNumber)
             ?.build();
 
+    if (request == null) {
+      completer.completeError(
+        JniNativeError(details: 'Failed to build request'),
+      );
+      return completer.future;
+    }
+
     final task = _getManager().prepareIntegrityToken(request);
+
+    if (task == null) {
+      completer.completeError(
+        JniNativeError(details: 'Failed to prepare token'),
+      );
+      return completer.future;
+    }
 
     final successListener =
         OnSuccessListener<
@@ -91,8 +105,8 @@ class PlayIntegrityJni {
       ),
     );
 
-    task?.addOnSuccessListener(successListener);
-    task?.addOnFailureListener(failureListener);
+    task.addOnSuccessListener(successListener);
+    task.addOnFailureListener(failureListener);
 
     return completer.future;
   }
@@ -111,7 +125,21 @@ class PlayIntegrityJni {
             ?.setRequestHash(requestHash.toJString())
             ?.build();
 
+    if (request == null) {
+      completer.completeError(
+        JniNativeError(details: 'Failed to build request'),
+      );
+      return completer.future;
+    }
+
     final task = provider.request(request);
+
+    if (task == null) {
+      completer.completeError(
+        JniNativeError(details: 'Failed to request token'),
+      );
+      return completer.future;
+    }
 
     final successListener =
         OnSuccessListener<
@@ -143,8 +171,8 @@ class PlayIntegrityJni {
       ),
     );
 
-    task?.addOnSuccessListener(successListener);
-    task?.addOnFailureListener(failureListener);
+    task.addOnSuccessListener(successListener);
+    task.addOnFailureListener(failureListener);
 
     return completer.future;
   }
