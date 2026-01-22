@@ -16,6 +16,8 @@ classes:
   # Play Integrity API
   - 'com.google.android.play.core.integrity.IntegrityManagerFactory'
   - 'com.google.android.play.core.integrity.StandardIntegrityManager'
+  - 'com.google.android.play.core.integrity.StandardIntegrityException'
+  - 'com.google.android.play.core.integrity.model.StandardIntegrityErrorCode'
   
   # Google Play Services Tasks (for async handling)
   - 'com.google.android.gms.tasks.Task'

@@ -6,10 +6,33 @@ import 'package:jni/jni.dart';
 /// Raw error from native Android APIs.
 class JniNativeError {
   /// Creates a new [JniNativeError].
-  JniNativeError({this.details});
+  JniNativeError({this.details, this.errorCode});
 
   /// Error details from the native exception.
   final String? details;
+
+  /// Error code from [StandardIntegrityException], if available.
+  /// See https://developer.android.com/google/play/integrity/error-codes
+  final int? errorCode;
+}
+
+/// Tries to extract the error code from a [StandardIntegrityException].
+/// Returns null if the exception is not a [StandardIntegrityException].
+JniNativeError _createNativeError(JObject? exception) {
+  if (exception == null) {
+    return JniNativeError(details: 'Unknown error');
+  }
+
+  int? errorCode;
+  try {
+    // Try to cast to StandardIntegrityException and get the error code
+    final integrityException = exception.as(StandardIntegrityException.type);
+    errorCode = integrityException.getErrorCode();
+  } catch (_) {
+    // Not a StandardIntegrityException, ignore
+  }
+
+  return JniNativeError(details: exception.toString(), errorCode: errorCode);
 }
 
 /// Pure JNI wrapper around Android Play Integrity API.
@@ -30,7 +53,7 @@ class PlayIntegrityJni {
   /// Prepares an integrity token provider for the given cloud project number.
   /// Returns the token provider on success, throws [JniNativeError] on failure.
   Future<StandardIntegrityManager$StandardIntegrityTokenProvider>
-      prepareTokenProvider(int cloudProjectNumber) {
+  prepareTokenProvider(int cloudProjectNumber) {
     final completer =
         Completer<StandardIntegrityManager$StandardIntegrityTokenProvider>();
 
@@ -41,25 +64,29 @@ class PlayIntegrityJni {
 
     final task = _getManager().prepareIntegrityToken(request);
 
-    final successListener = OnSuccessListener<
-        StandardIntegrityManager$StandardIntegrityTokenProvider?>.implement(
-      $OnSuccessListener(
-        TResult:
-            const $StandardIntegrityManager$StandardIntegrityTokenProvider$NullableType$(),
-        onSuccess: (provider) {
-          if (provider != null) {
-            completer.complete(provider);
-          } else {
-            completer.completeError(JniNativeError(details: 'Provider is null'));
-          }
-        },
-      ),
-    );
+    final successListener =
+        OnSuccessListener<
+          StandardIntegrityManager$StandardIntegrityTokenProvider?
+        >.implement(
+          $OnSuccessListener(
+            TResult:
+                const $StandardIntegrityManager$StandardIntegrityTokenProvider$NullableType$(),
+            onSuccess: (provider) {
+              if (provider != null) {
+                completer.complete(provider);
+              } else {
+                completer.completeError(
+                  JniNativeError(details: 'Provider is null'),
+                );
+              }
+            },
+          ),
+        );
 
     final failureListener = OnFailureListener.implement(
       $OnFailureListener(
         onFailure: (exception) {
-          completer.completeError(JniNativeError(details: exception?.toString()));
+          completer.completeError(_createNativeError(exception));
         },
       ),
     );
@@ -87,25 +114,31 @@ class PlayIntegrityJni {
     final task = provider.request(request);
 
     final successListener =
-        OnSuccessListener<StandardIntegrityManager$StandardIntegrityToken?>.implement(
-      $OnSuccessListener(
-        TResult:
-            const $StandardIntegrityManager$StandardIntegrityToken$NullableType$(),
-        onSuccess: (token) {
-          final tokenString = token?.token()?.toDartString(releaseOriginal: true);
-          if (tokenString != null) {
-            completer.complete(tokenString);
-          } else {
-            completer.completeError(JniNativeError(details: 'Token is null'));
-          }
-        },
-      ),
-    );
+        OnSuccessListener<
+          StandardIntegrityManager$StandardIntegrityToken?
+        >.implement(
+          $OnSuccessListener(
+            TResult:
+                const $StandardIntegrityManager$StandardIntegrityToken$NullableType$(),
+            onSuccess: (token) {
+              final tokenString = token?.token()?.toDartString(
+                releaseOriginal: true,
+              );
+              if (tokenString != null) {
+                completer.complete(tokenString);
+              } else {
+                completer.completeError(
+                  JniNativeError(details: 'Token is null'),
+                );
+              }
+            },
+          ),
+        );
 
     final failureListener = OnFailureListener.implement(
       $OnFailureListener(
         onFailure: (exception) {
-          completer.completeError(JniNativeError(details: exception?.toString()));
+          completer.completeError(_createNativeError(exception));
         },
       ),
     );

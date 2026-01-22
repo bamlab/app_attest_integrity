@@ -1768,6 +1768,387 @@ final class $StandardIntegrityManager$Type$
   }
 }
 
+/// from: `com.google.android.play.core.integrity.StandardIntegrityException`
+class StandardIntegrityException extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JType<StandardIntegrityException> $type;
+
+  @jni$_.internal
+  StandardIntegrityException.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+    r'com/google/android/play/core/integrity/StandardIntegrityException',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<StandardIntegrityException?> nullableType =
+      $StandardIntegrityException$NullableType$();
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<StandardIntegrityException> type =
+      $StandardIntegrityException$Type$();
+  static final _id_getErrorCode = _class.instanceMethodId(
+    r'getErrorCode',
+    r'()I',
+  );
+
+  static final _getErrorCode =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallIntMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public int getErrorCode()`
+  int getErrorCode() {
+    return _getErrorCode(
+      reference.pointer,
+      _id_getErrorCode as jni$_.JMethodIDPtr,
+    ).integer;
+  }
+
+  static final _id_getCause = _class.instanceMethodId(
+    r'getCause',
+    r'()Ljava/lang/Throwable;',
+  );
+
+  static final _getCause =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public final java.lang.Throwable getCause()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getCause() {
+    return _getCause(
+      reference.pointer,
+      _id_getCause as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
+  }
+}
+
+final class $StandardIntegrityException$NullableType$
+    extends jni$_.JType<StandardIntegrityException?> {
+  @jni$_.internal
+  const $StandardIntegrityException$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lcom/google/android/play/core/integrity/StandardIntegrityException;';
+
+  @jni$_.internal
+  @core$_.override
+  StandardIntegrityException? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+      ? null
+      : StandardIntegrityException.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<StandardIntegrityException?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($StandardIntegrityException$NullableType$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($StandardIntegrityException$NullableType$) &&
+        other is $StandardIntegrityException$NullableType$;
+  }
+}
+
+final class $StandardIntegrityException$Type$
+    extends jni$_.JType<StandardIntegrityException> {
+  @jni$_.internal
+  const $StandardIntegrityException$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lcom/google/android/play/core/integrity/StandardIntegrityException;';
+
+  @jni$_.internal
+  @core$_.override
+  StandardIntegrityException fromReference(jni$_.JReference reference) =>
+      StandardIntegrityException.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<StandardIntegrityException?> get nullableType =>
+      const $StandardIntegrityException$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($StandardIntegrityException$Type$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($StandardIntegrityException$Type$) &&
+        other is $StandardIntegrityException$Type$;
+  }
+}
+
+/// from: `com.google.android.play.core.integrity.model.StandardIntegrityErrorCode`
+class StandardIntegrityErrorCode extends jni$_.JObject {
+  @jni$_.internal
+  @core$_.override
+  final jni$_.JType<StandardIntegrityErrorCode> $type;
+
+  @jni$_.internal
+  StandardIntegrityErrorCode.fromReference(jni$_.JReference reference)
+    : $type = type,
+      super.fromReference(reference);
+
+  static final _class = jni$_.JClass.forName(
+    r'com/google/android/play/core/integrity/model/StandardIntegrityErrorCode',
+  );
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<StandardIntegrityErrorCode?> nullableType =
+      $StandardIntegrityErrorCode$NullableType$();
+
+  /// The type which includes information such as the signature of this class.
+  static const jni$_.JType<StandardIntegrityErrorCode> type =
+      $StandardIntegrityErrorCode$Type$();
+
+  /// from: `static public final int NO_ERROR`
+  static const NO_ERROR = 0;
+
+  /// from: `static public final int API_NOT_AVAILABLE`
+  static const API_NOT_AVAILABLE = -1;
+
+  /// from: `static public final int PLAY_STORE_NOT_FOUND`
+  static const PLAY_STORE_NOT_FOUND = -2;
+
+  /// from: `static public final int NETWORK_ERROR`
+  static const NETWORK_ERROR = -3;
+
+  /// from: `static public final int APP_NOT_INSTALLED`
+  static const APP_NOT_INSTALLED = -5;
+
+  /// from: `static public final int PLAY_SERVICES_NOT_FOUND`
+  static const PLAY_SERVICES_NOT_FOUND = -6;
+
+  /// from: `static public final int APP_UID_MISMATCH`
+  static const APP_UID_MISMATCH = -7;
+
+  /// from: `static public final int TOO_MANY_REQUESTS`
+  static const TOO_MANY_REQUESTS = -8;
+
+  /// from: `static public final int CANNOT_BIND_TO_SERVICE`
+  static const CANNOT_BIND_TO_SERVICE = -9;
+
+  /// from: `static public final int GOOGLE_SERVER_UNAVAILABLE`
+  static const GOOGLE_SERVER_UNAVAILABLE = -12;
+
+  /// from: `static public final int PLAY_STORE_VERSION_OUTDATED`
+  static const PLAY_STORE_VERSION_OUTDATED = -14;
+
+  /// from: `static public final int PLAY_SERVICES_VERSION_OUTDATED`
+  static const PLAY_SERVICES_VERSION_OUTDATED = -15;
+
+  /// from: `static public final int CLOUD_PROJECT_NUMBER_IS_INVALID`
+  static const CLOUD_PROJECT_NUMBER_IS_INVALID = -16;
+
+  /// from: `static public final int REQUEST_HASH_TOO_LONG`
+  static const REQUEST_HASH_TOO_LONG = -17;
+
+  /// from: `static public final int CLIENT_TRANSIENT_ERROR`
+  static const CLIENT_TRANSIENT_ERROR = -18;
+
+  /// from: `static public final int INTEGRITY_TOKEN_PROVIDER_INVALID`
+  static const INTEGRITY_TOKEN_PROVIDER_INVALID = -19;
+
+  /// from: `static public final int INTERNAL_ERROR`
+  static const INTERNAL_ERROR = -100;
+
+  /// Maps a specific port to the implemented interface.
+  static final core$_.Map<int, $StandardIntegrityErrorCode> _$impls = {};
+  static jni$_.JObjectPtr _$invoke(
+    int port,
+    jni$_.JObjectPtr descriptor,
+    jni$_.JObjectPtr args,
+  ) {
+    return _$invokeMethod(
+      port,
+      jni$_.MethodInvocation.fromAddresses(0, descriptor.address, args.address),
+    );
+  }
+
+  static final jni$_.Pointer<
+    jni$_.NativeFunction<
+      jni$_.JObjectPtr Function(jni$_.Int64, jni$_.JObjectPtr, jni$_.JObjectPtr)
+    >
+  >
+  _$invokePointer = jni$_.Pointer.fromFunction(_$invoke);
+
+  static jni$_.Pointer<jni$_.Void> _$invokeMethod(
+    int $p,
+    jni$_.MethodInvocation $i,
+  ) {
+    try {
+      final $d = $i.methodDescriptor.toDartString(releaseOriginal: true);
+      final $a = $i.args;
+    } catch (e) {
+      return jni$_.ProtectedJniExtensions.newDartException(e);
+    }
+    return jni$_.nullptr;
+  }
+
+  static void implementIn(
+    jni$_.JImplementer implementer,
+    $StandardIntegrityErrorCode $impl,
+  ) {
+    late final jni$_.RawReceivePort $p;
+    $p = jni$_.RawReceivePort(($m) {
+      if ($m == null) {
+        _$impls.remove($p.sendPort.nativePort);
+        $p.close();
+        return;
+      }
+      final $i = jni$_.MethodInvocation.fromMessage($m);
+      final $r = _$invokeMethod($p.sendPort.nativePort, $i);
+      jni$_.ProtectedJniExtensions.returnResult($i.result, $r);
+    });
+    implementer.add(
+      r'com.google.android.play.core.integrity.model.StandardIntegrityErrorCode',
+      $p,
+      _$invokePointer,
+      [],
+    );
+    final $a = $p.sendPort.nativePort;
+    _$impls[$a] = $impl;
+  }
+
+  factory StandardIntegrityErrorCode.implement(
+    $StandardIntegrityErrorCode $impl,
+  ) {
+    final $i = jni$_.JImplementer();
+    implementIn($i, $impl);
+    return StandardIntegrityErrorCode.fromReference($i.implementReference());
+  }
+}
+
+abstract base mixin class $StandardIntegrityErrorCode {
+  factory $StandardIntegrityErrorCode() = _$StandardIntegrityErrorCode;
+}
+
+final class _$StandardIntegrityErrorCode with $StandardIntegrityErrorCode {
+  _$StandardIntegrityErrorCode();
+}
+
+final class $StandardIntegrityErrorCode$NullableType$
+    extends jni$_.JType<StandardIntegrityErrorCode?> {
+  @jni$_.internal
+  const $StandardIntegrityErrorCode$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lcom/google/android/play/core/integrity/model/StandardIntegrityErrorCode;';
+
+  @jni$_.internal
+  @core$_.override
+  StandardIntegrityErrorCode? fromReference(jni$_.JReference reference) =>
+      reference.isNull
+      ? null
+      : StandardIntegrityErrorCode.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<StandardIntegrityErrorCode?> get nullableType => this;
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($StandardIntegrityErrorCode$NullableType$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($StandardIntegrityErrorCode$NullableType$) &&
+        other is $StandardIntegrityErrorCode$NullableType$;
+  }
+}
+
+final class $StandardIntegrityErrorCode$Type$
+    extends jni$_.JType<StandardIntegrityErrorCode> {
+  @jni$_.internal
+  const $StandardIntegrityErrorCode$Type$();
+
+  @jni$_.internal
+  @core$_.override
+  String get signature =>
+      r'Lcom/google/android/play/core/integrity/model/StandardIntegrityErrorCode;';
+
+  @jni$_.internal
+  @core$_.override
+  StandardIntegrityErrorCode fromReference(jni$_.JReference reference) =>
+      StandardIntegrityErrorCode.fromReference(reference);
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType get superType => const jni$_.$JObject$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  jni$_.JType<StandardIntegrityErrorCode?> get nullableType =>
+      const $StandardIntegrityErrorCode$NullableType$();
+
+  @jni$_.internal
+  @core$_.override
+  final superCount = 1;
+
+  @core$_.override
+  int get hashCode => ($StandardIntegrityErrorCode$Type$).hashCode;
+
+  @core$_.override
+  bool operator ==(Object other) {
+    return other.runtimeType == ($StandardIntegrityErrorCode$Type$) &&
+        other is $StandardIntegrityErrorCode$Type$;
+  }
+}
+
 /// from: `com.google.android.gms.tasks.Task`
 class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
   @jni$_.internal
@@ -1799,123 +2180,12 @@ class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
     return $Task$Type$<$TResult>(TResult);
   }
 
-  static final _id_isComplete = _class.instanceMethodId(r'isComplete', r'()Z');
-
-  static final _isComplete =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public abstract boolean isComplete()`
-  bool isComplete() {
-    return _isComplete(
-      reference.pointer,
-      _id_isComplete as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_isSuccessful = _class.instanceMethodId(
-    r'isSuccessful',
-    r'()Z',
+  static final _id_addOnCanceledListener = _class.instanceMethodId(
+    r'addOnCanceledListener',
+    r'(Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
   );
 
-  static final _isSuccessful =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public abstract boolean isSuccessful()`
-  bool isSuccessful() {
-    return _isSuccessful(
-      reference.pointer,
-      _id_isSuccessful as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_isCanceled = _class.instanceMethodId(r'isCanceled', r'()Z');
-
-  static final _isCanceled =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallBooleanMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public abstract boolean isCanceled()`
-  bool isCanceled() {
-    return _isCanceled(
-      reference.pointer,
-      _id_isCanceled as jni$_.JMethodIDPtr,
-    ).boolean;
-  }
-
-  static final _id_getResult = _class.instanceMethodId(
-    r'getResult',
-    r'()Ljava/lang/Object;',
-  );
-
-  static final _getResult =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-            )
-          >();
-
-  /// from: `public abstract TResult getResult()`
-  /// The returned object must be released after use, by calling the [release] method.
-  $TResult? getResult() {
-    return _getResult(
-      reference.pointer,
-      _id_getResult as jni$_.JMethodIDPtr,
-    ).object<$TResult?>(TResult.nullableType);
-  }
-
-  static final _id_getResult$1 = _class.instanceMethodId(
-    r'getResult',
-    r'(Ljava/lang/Class;)Ljava/lang/Object;',
-  );
-
-  static final _getResult$1 =
+  static final _addOnCanceledListener =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
@@ -1933,31 +2203,31 @@ class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
             )
           >();
 
-  /// from: `public abstract TResult getResult(java.lang.Class<X> class)`
+  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCanceledListener(com.google.android.gms.tasks.OnCanceledListener onCanceledListener)`
   /// The returned object must be released after use, by calling the [release] method.
-  $TResult? getResult$1<$X extends jni$_.JObject?>(
-    jni$_.JObject class$, {
-    required jni$_.JType<$X> X,
-  }) {
-    final _$class$ = class$.reference;
-    return _getResult$1(
+  Task<$TResult?> addOnCanceledListener(jni$_.JObject onCanceledListener) {
+    final _$onCanceledListener = onCanceledListener.reference;
+    return _addOnCanceledListener(
       reference.pointer,
-      _id_getResult$1 as jni$_.JMethodIDPtr,
-      _$class$.pointer,
-    ).object<$TResult?>(TResult.nullableType);
+      _id_addOnCanceledListener as jni$_.JMethodIDPtr,
+      _$onCanceledListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
   }
 
-  static final _id_getException = _class.instanceMethodId(
-    r'getException',
-    r'()Ljava/lang/Exception;',
+  static final _id_addOnCanceledListener$1 = _class.instanceMethodId(
+    r'addOnCanceledListener',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
   );
 
-  static final _getException =
+  static final _addOnCanceledListener$1 =
       jni$_.ProtectedJniExtensions.lookup<
             jni$_.NativeFunction<
               jni$_.JniResult Function(
                 jni$_.Pointer<jni$_.Void>,
                 jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
               )
             >
           >('globalEnv_CallObjectMethod')
@@ -1965,16 +2235,303 @@ class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
             jni$_.JniResult Function(
               jni$_.Pointer<jni$_.Void>,
               jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
             )
           >();
 
-  /// from: `public abstract java.lang.Exception getException()`
+  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCanceledListener(android.app.Activity activity, com.google.android.gms.tasks.OnCanceledListener onCanceledListener)`
   /// The returned object must be released after use, by calling the [release] method.
-  jni$_.JObject? getException() {
-    return _getException(
+  Task<$TResult?> addOnCanceledListener$1(
+    jni$_.JObject activity,
+    jni$_.JObject onCanceledListener,
+  ) {
+    final _$activity = activity.reference;
+    final _$onCanceledListener = onCanceledListener.reference;
+    return _addOnCanceledListener$1(
       reference.pointer,
-      _id_getException as jni$_.JMethodIDPtr,
-    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
+      _id_addOnCanceledListener$1 as jni$_.JMethodIDPtr,
+      _$activity.pointer,
+      _$onCanceledListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
+  }
+
+  static final _id_addOnCanceledListener$2 = _class.instanceMethodId(
+    r'addOnCanceledListener',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCanceledListener$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCanceledListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnCanceledListener onCanceledListener)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult?> addOnCanceledListener$2(
+    jni$_.JObject executor,
+    jni$_.JObject onCanceledListener,
+  ) {
+    final _$executor = executor.reference;
+    final _$onCanceledListener = onCanceledListener.reference;
+    return _addOnCanceledListener$2(
+      reference.pointer,
+      _id_addOnCanceledListener$2 as jni$_.JMethodIDPtr,
+      _$executor.pointer,
+      _$onCanceledListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
+  }
+
+  static final _id_addOnCompleteListener = _class.instanceMethodId(
+    r'addOnCompleteListener',
+    r'(Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCompleteListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCompleteListener(com.google.android.gms.tasks.OnCompleteListener<TResult> onCompleteListener)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult?> addOnCompleteListener(jni$_.JObject onCompleteListener) {
+    final _$onCompleteListener = onCompleteListener.reference;
+    return _addOnCompleteListener(
+      reference.pointer,
+      _id_addOnCompleteListener as jni$_.JMethodIDPtr,
+      _$onCompleteListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
+  }
+
+  static final _id_addOnCompleteListener$1 = _class.instanceMethodId(
+    r'addOnCompleteListener',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCompleteListener$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCompleteListener(android.app.Activity activity, com.google.android.gms.tasks.OnCompleteListener<TResult> onCompleteListener)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult?> addOnCompleteListener$1(
+    jni$_.JObject activity,
+    jni$_.JObject onCompleteListener,
+  ) {
+    final _$activity = activity.reference;
+    final _$onCompleteListener = onCompleteListener.reference;
+    return _addOnCompleteListener$1(
+      reference.pointer,
+      _id_addOnCompleteListener$1 as jni$_.JMethodIDPtr,
+      _$activity.pointer,
+      _$onCompleteListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
+  }
+
+  static final _id_addOnCompleteListener$2 = _class.instanceMethodId(
+    r'addOnCompleteListener',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnCompleteListener$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCompleteListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnCompleteListener<TResult> onCompleteListener)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult?> addOnCompleteListener$2(
+    jni$_.JObject executor,
+    jni$_.JObject onCompleteListener,
+  ) {
+    final _$executor = executor.reference;
+    final _$onCompleteListener = onCompleteListener.reference;
+    return _addOnCompleteListener$2(
+      reference.pointer,
+      _id_addOnCompleteListener$2 as jni$_.JMethodIDPtr,
+      _$executor.pointer,
+      _$onCompleteListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
+  }
+
+  static final _id_addOnFailureListener = _class.instanceMethodId(
+    r'addOnFailureListener',
+    r'(Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnFailureListener =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnFailureListener(com.google.android.gms.tasks.OnFailureListener onFailureListener)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult?> addOnFailureListener(OnFailureListener onFailureListener) {
+    final _$onFailureListener = onFailureListener.reference;
+    return _addOnFailureListener(
+      reference.pointer,
+      _id_addOnFailureListener as jni$_.JMethodIDPtr,
+      _$onFailureListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
+  }
+
+  static final _id_addOnFailureListener$1 = _class.instanceMethodId(
+    r'addOnFailureListener',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnFailureListener$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnFailureListener(android.app.Activity activity, com.google.android.gms.tasks.OnFailureListener onFailureListener)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult?> addOnFailureListener$1(
+    jni$_.JObject activity,
+    OnFailureListener onFailureListener,
+  ) {
+    final _$activity = activity.reference;
+    final _$onFailureListener = onFailureListener.reference;
+    return _addOnFailureListener$1(
+      reference.pointer,
+      _id_addOnFailureListener$1 as jni$_.JMethodIDPtr,
+      _$activity.pointer,
+      _$onFailureListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
+  }
+
+  static final _id_addOnFailureListener$2 = _class.instanceMethodId(
+    r'addOnFailureListener',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
+  );
+
+  static final _addOnFailureListener$2 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<
+                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
+                >,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnFailureListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnFailureListener onFailureListener)`
+  /// The returned object must be released after use, by calling the [release] method.
+  Task<$TResult?> addOnFailureListener$2(
+    jni$_.JObject executor,
+    OnFailureListener onFailureListener,
+  ) {
+    final _$executor = executor.reference;
+    final _$onFailureListener = onFailureListener.reference;
+    return _addOnFailureListener$2(
+      reference.pointer,
+      _id_addOnFailureListener$2 as jni$_.JMethodIDPtr,
+      _$executor.pointer,
+      _$onFailureListener.pointer,
+    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
   }
 
   static final _id_addOnSuccessListener = _class.instanceMethodId(
@@ -2015,7 +2572,7 @@ class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
 
   static final _id_addOnSuccessListener$1 = _class.instanceMethodId(
     r'addOnSuccessListener',
-    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnSuccessListener;)Lcom/google/android/gms/tasks/Task;',
+    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnSuccessListener;)Lcom/google/android/gms/tasks/Task;',
   );
 
   static final _addOnSuccessListener$1 =
@@ -2039,25 +2596,25 @@ class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
             )
           >();
 
-  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnSuccessListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnSuccessListener<? super TResult> onSuccessListener)`
+  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnSuccessListener(android.app.Activity activity, com.google.android.gms.tasks.OnSuccessListener<? super TResult> onSuccessListener)`
   /// The returned object must be released after use, by calling the [release] method.
   Task<$TResult?> addOnSuccessListener$1(
-    jni$_.JObject executor,
+    jni$_.JObject activity,
     OnSuccessListener<jni$_.JObject?> onSuccessListener,
   ) {
-    final _$executor = executor.reference;
+    final _$activity = activity.reference;
     final _$onSuccessListener = onSuccessListener.reference;
     return _addOnSuccessListener$1(
       reference.pointer,
       _id_addOnSuccessListener$1 as jni$_.JMethodIDPtr,
-      _$executor.pointer,
+      _$activity.pointer,
       _$onSuccessListener.pointer,
     ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
   }
 
   static final _id_addOnSuccessListener$2 = _class.instanceMethodId(
     r'addOnSuccessListener',
-    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnSuccessListener;)Lcom/google/android/gms/tasks/Task;',
+    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnSuccessListener;)Lcom/google/android/gms/tasks/Task;',
   );
 
   static final _addOnSuccessListener$2 =
@@ -2081,373 +2638,19 @@ class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
             )
           >();
 
-  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnSuccessListener(android.app.Activity activity, com.google.android.gms.tasks.OnSuccessListener<? super TResult> onSuccessListener)`
+  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnSuccessListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnSuccessListener<? super TResult> onSuccessListener)`
   /// The returned object must be released after use, by calling the [release] method.
   Task<$TResult?> addOnSuccessListener$2(
-    jni$_.JObject activity,
+    jni$_.JObject executor,
     OnSuccessListener<jni$_.JObject?> onSuccessListener,
   ) {
-    final _$activity = activity.reference;
+    final _$executor = executor.reference;
     final _$onSuccessListener = onSuccessListener.reference;
     return _addOnSuccessListener$2(
       reference.pointer,
       _id_addOnSuccessListener$2 as jni$_.JMethodIDPtr,
-      _$activity.pointer,
+      _$executor.pointer,
       _$onSuccessListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnFailureListener = _class.instanceMethodId(
-    r'addOnFailureListener',
-    r'(Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnFailureListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnFailureListener(com.google.android.gms.tasks.OnFailureListener onFailureListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnFailureListener(OnFailureListener onFailureListener) {
-    final _$onFailureListener = onFailureListener.reference;
-    return _addOnFailureListener(
-      reference.pointer,
-      _id_addOnFailureListener as jni$_.JMethodIDPtr,
-      _$onFailureListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnFailureListener$1 = _class.instanceMethodId(
-    r'addOnFailureListener',
-    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnFailureListener$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnFailureListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnFailureListener onFailureListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnFailureListener$1(
-    jni$_.JObject executor,
-    OnFailureListener onFailureListener,
-  ) {
-    final _$executor = executor.reference;
-    final _$onFailureListener = onFailureListener.reference;
-    return _addOnFailureListener$1(
-      reference.pointer,
-      _id_addOnFailureListener$1 as jni$_.JMethodIDPtr,
-      _$executor.pointer,
-      _$onFailureListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnFailureListener$2 = _class.instanceMethodId(
-    r'addOnFailureListener',
-    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnFailureListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnFailureListener$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public abstract com.google.android.gms.tasks.Task<TResult> addOnFailureListener(android.app.Activity activity, com.google.android.gms.tasks.OnFailureListener onFailureListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnFailureListener$2(
-    jni$_.JObject activity,
-    OnFailureListener onFailureListener,
-  ) {
-    final _$activity = activity.reference;
-    final _$onFailureListener = onFailureListener.reference;
-    return _addOnFailureListener$2(
-      reference.pointer,
-      _id_addOnFailureListener$2 as jni$_.JMethodIDPtr,
-      _$activity.pointer,
-      _$onFailureListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnCompleteListener = _class.instanceMethodId(
-    r'addOnCompleteListener',
-    r'(Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnCompleteListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCompleteListener(com.google.android.gms.tasks.OnCompleteListener<TResult> onCompleteListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnCompleteListener(jni$_.JObject onCompleteListener) {
-    final _$onCompleteListener = onCompleteListener.reference;
-    return _addOnCompleteListener(
-      reference.pointer,
-      _id_addOnCompleteListener as jni$_.JMethodIDPtr,
-      _$onCompleteListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnCompleteListener$1 = _class.instanceMethodId(
-    r'addOnCompleteListener',
-    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnCompleteListener$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCompleteListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnCompleteListener<TResult> onCompleteListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnCompleteListener$1(
-    jni$_.JObject executor,
-    jni$_.JObject onCompleteListener,
-  ) {
-    final _$executor = executor.reference;
-    final _$onCompleteListener = onCompleteListener.reference;
-    return _addOnCompleteListener$1(
-      reference.pointer,
-      _id_addOnCompleteListener$1 as jni$_.JMethodIDPtr,
-      _$executor.pointer,
-      _$onCompleteListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnCompleteListener$2 = _class.instanceMethodId(
-    r'addOnCompleteListener',
-    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnCompleteListener$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCompleteListener(android.app.Activity activity, com.google.android.gms.tasks.OnCompleteListener<TResult> onCompleteListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnCompleteListener$2(
-    jni$_.JObject activity,
-    jni$_.JObject onCompleteListener,
-  ) {
-    final _$activity = activity.reference;
-    final _$onCompleteListener = onCompleteListener.reference;
-    return _addOnCompleteListener$2(
-      reference.pointer,
-      _id_addOnCompleteListener$2 as jni$_.JMethodIDPtr,
-      _$activity.pointer,
-      _$onCompleteListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnCanceledListener = _class.instanceMethodId(
-    r'addOnCanceledListener',
-    r'(Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnCanceledListener =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCanceledListener(com.google.android.gms.tasks.OnCanceledListener onCanceledListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnCanceledListener(jni$_.JObject onCanceledListener) {
-    final _$onCanceledListener = onCanceledListener.reference;
-    return _addOnCanceledListener(
-      reference.pointer,
-      _id_addOnCanceledListener as jni$_.JMethodIDPtr,
-      _$onCanceledListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnCanceledListener$1 = _class.instanceMethodId(
-    r'addOnCanceledListener',
-    r'(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnCanceledListener$1 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCanceledListener(java.util.concurrent.Executor executor, com.google.android.gms.tasks.OnCanceledListener onCanceledListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnCanceledListener$1(
-    jni$_.JObject executor,
-    jni$_.JObject onCanceledListener,
-  ) {
-    final _$executor = executor.reference;
-    final _$onCanceledListener = onCanceledListener.reference;
-    return _addOnCanceledListener$1(
-      reference.pointer,
-      _id_addOnCanceledListener$1 as jni$_.JMethodIDPtr,
-      _$executor.pointer,
-      _$onCanceledListener.pointer,
-    ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
-  }
-
-  static final _id_addOnCanceledListener$2 = _class.instanceMethodId(
-    r'addOnCanceledListener',
-    r'(Landroid/app/Activity;Lcom/google/android/gms/tasks/OnCanceledListener;)Lcom/google/android/gms/tasks/Task;',
-  );
-
-  static final _addOnCanceledListener$2 =
-      jni$_.ProtectedJniExtensions.lookup<
-            jni$_.NativeFunction<
-              jni$_.JniResult Function(
-                jni$_.Pointer<jni$_.Void>,
-                jni$_.JMethodIDPtr,
-                jni$_.VarArgs<
-                  (jni$_.Pointer<jni$_.Void>, jni$_.Pointer<jni$_.Void>)
-                >,
-              )
-            >
-          >('globalEnv_CallObjectMethod')
-          .asFunction<
-            jni$_.JniResult Function(
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.JMethodIDPtr,
-              jni$_.Pointer<jni$_.Void>,
-              jni$_.Pointer<jni$_.Void>,
-            )
-          >();
-
-  /// from: `public com.google.android.gms.tasks.Task<TResult> addOnCanceledListener(android.app.Activity activity, com.google.android.gms.tasks.OnCanceledListener onCanceledListener)`
-  /// The returned object must be released after use, by calling the [release] method.
-  Task<$TResult?> addOnCanceledListener$2(
-    jni$_.JObject activity,
-    jni$_.JObject onCanceledListener,
-  ) {
-    final _$activity = activity.reference;
-    final _$onCanceledListener = onCanceledListener.reference;
-    return _addOnCanceledListener$2(
-      reference.pointer,
-      _id_addOnCanceledListener$2 as jni$_.JMethodIDPtr,
-      _$activity.pointer,
-      _$onCanceledListener.pointer,
     ).object<Task<$TResult?>>($Task$Type$<$TResult?>(TResult.nullableType));
   }
 
@@ -2707,6 +2910,184 @@ class Task<$TResult extends jni$_.JObject?> extends jni$_.JObject {
     ).object<Task<$TContinuationResult?>>(
       $Task$Type$<$TContinuationResult?>(TContinuationResult.nullableType),
     );
+  }
+
+  static final _id_getException = _class.instanceMethodId(
+    r'getException',
+    r'()Ljava/lang/Exception;',
+  );
+
+  static final _getException =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public abstract java.lang.Exception getException()`
+  /// The returned object must be released after use, by calling the [release] method.
+  jni$_.JObject? getException() {
+    return _getException(
+      reference.pointer,
+      _id_getException as jni$_.JMethodIDPtr,
+    ).object<jni$_.JObject?>(const jni$_.$JObject$NullableType$());
+  }
+
+  static final _id_getResult = _class.instanceMethodId(
+    r'getResult',
+    r'()Ljava/lang/Object;',
+  );
+
+  static final _getResult =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public abstract TResult getResult()`
+  /// The returned object must be released after use, by calling the [release] method.
+  $TResult? getResult() {
+    return _getResult(
+      reference.pointer,
+      _id_getResult as jni$_.JMethodIDPtr,
+    ).object<$TResult?>(TResult.nullableType);
+  }
+
+  static final _id_getResult$1 = _class.instanceMethodId(
+    r'getResult',
+    r'(Ljava/lang/Class;)Ljava/lang/Object;',
+  );
+
+  static final _getResult$1 =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+                jni$_.VarArgs<(jni$_.Pointer<jni$_.Void>,)>,
+              )
+            >
+          >('globalEnv_CallObjectMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+              jni$_.Pointer<jni$_.Void>,
+            )
+          >();
+
+  /// from: `public abstract TResult getResult(java.lang.Class<X> class)`
+  /// The returned object must be released after use, by calling the [release] method.
+  $TResult? getResult$1<$X extends jni$_.JObject?>(
+    jni$_.JObject class$, {
+    required jni$_.JType<$X> X,
+  }) {
+    final _$class$ = class$.reference;
+    return _getResult$1(
+      reference.pointer,
+      _id_getResult$1 as jni$_.JMethodIDPtr,
+      _$class$.pointer,
+    ).object<$TResult?>(TResult.nullableType);
+  }
+
+  static final _id_isCanceled = _class.instanceMethodId(r'isCanceled', r'()Z');
+
+  static final _isCanceled =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public abstract boolean isCanceled()`
+  bool isCanceled() {
+    return _isCanceled(
+      reference.pointer,
+      _id_isCanceled as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_isComplete = _class.instanceMethodId(r'isComplete', r'()Z');
+
+  static final _isComplete =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public abstract boolean isComplete()`
+  bool isComplete() {
+    return _isComplete(
+      reference.pointer,
+      _id_isComplete as jni$_.JMethodIDPtr,
+    ).boolean;
+  }
+
+  static final _id_isSuccessful = _class.instanceMethodId(
+    r'isSuccessful',
+    r'()Z',
+  );
+
+  static final _isSuccessful =
+      jni$_.ProtectedJniExtensions.lookup<
+            jni$_.NativeFunction<
+              jni$_.JniResult Function(
+                jni$_.Pointer<jni$_.Void>,
+                jni$_.JMethodIDPtr,
+              )
+            >
+          >('globalEnv_CallBooleanMethod')
+          .asFunction<
+            jni$_.JniResult Function(
+              jni$_.Pointer<jni$_.Void>,
+              jni$_.JMethodIDPtr,
+            )
+          >();
+
+  /// from: `public abstract boolean isSuccessful()`
+  bool isSuccessful() {
+    return _isSuccessful(
+      reference.pointer,
+      _id_isSuccessful as jni$_.JMethodIDPtr,
+    ).boolean;
   }
 }
 

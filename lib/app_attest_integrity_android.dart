@@ -1,4 +1,5 @@
 import 'package:app_attest_integrity/app_attest_integrity_platform_interface.dart';
+import 'package:app_attest_integrity/src/android/play_integrity_bindings.g.dart';
 import 'package:app_attest_integrity/src/android/play_integrity_service_android.dart';
 import 'package:app_attest_integrity/src/core/crypto_utils.dart';
 import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
@@ -33,15 +34,18 @@ class AppAttestIntegrityAndroid extends AppAttestIntegrityPlatform {
     return null;
   }
 
+  static const int _maxRetries = 3;
+
   @override
   Future<String> verify({
     required String clientData,
     String? iOSkeyID,
     int? androidCloudProjectNumber,
   }) async {
+    final projectNumber = androidCloudProjectNumber ?? _cloudProjectNumber;
+
     // Ensure token provider is prepared
     if (!_service.isPrepared) {
-      final projectNumber = androidCloudProjectNumber ?? _cloudProjectNumber;
       if (projectNumber == null) {
         throw PlatformException(
           code: 'no_project_number',
@@ -52,15 +56,36 @@ class AppAttestIntegrityAndroid extends AppAttestIntegrityPlatform {
       await androidPrepareIntegrityServer(projectNumber);
     }
 
-    try {
-      final requestHash = CryptoUtils.sha256HashBase64(clientData);
-      return await _service.requestIntegrityToken(requestHash);
-    } on PlayIntegrityException catch (e) {
-      throw PlatformException(
-        code: e.code.name,
-        message: e.message,
-        details: e.details,
-      );
+    final requestHash = CryptoUtils.sha256HashBase64(clientData);
+
+    // Retry logic for expired token providers
+    for (var attempt = 0; attempt < _maxRetries; attempt++) {
+      try {
+        return await _service.requestIntegrityToken(requestHash);
+      } on PlayIntegrityException catch (e) {
+        final isProviderInvalid =
+            e.nativeErrorCode ==
+            StandardIntegrityErrorCode.INTEGRITY_TOKEN_PROVIDER_INVALID;
+
+        // If provider is invalid and we have a project number, refresh and retry
+        if (isProviderInvalid && projectNumber != null) {
+          await _service.refreshTokenProvider(projectNumber);
+          continue;
+        }
+
+        // Otherwise, throw the error
+        throw PlatformException(
+          code: e.code.name,
+          message: e.message,
+          details: e.details,
+        );
+      }
     }
+
+    // If we exhausted all retries
+    throw PlatformException(
+      code: 'max_retries_exceeded',
+      message: 'Failed to get integrity token after $_maxRetries attempts.',
+    );
   }
 }

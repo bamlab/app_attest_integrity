@@ -20,6 +20,7 @@ class PlayIntegrityException implements Exception {
     required this.code,
     required this.message,
     this.details,
+    this.nativeErrorCode,
   });
 
   /// The error code.
@@ -30,6 +31,10 @@ class PlayIntegrityException implements Exception {
 
   /// Additional error details, if available.
   final String? details;
+
+  /// Native error code from [StandardIntegrityException], if available.
+  /// See https://developer.android.com/google/play/integrity/error-codes
+  final int? nativeErrorCode;
 
   @override
   String toString() => 'PlayIntegrityException: $message';
@@ -62,8 +67,19 @@ class PlayIntegrityServiceAndroid {
         code: PlayIntegrityErrorCode.prepareFailed,
         message: 'Failed to prepare integrity token',
         details: e.details,
+        nativeErrorCode: e.errorCode,
       );
     }
+  }
+
+  /// Refreshes the token provider by preparing a new one.
+  ///
+  /// Use this when the current provider has expired
+  /// (INTEGRITY_TOKEN_PROVIDER_INVALID error).
+  /// Throws [PlayIntegrityException] on failure.
+  Future<void> refreshTokenProvider(int cloudProjectNumber) async {
+    _tokenProvider = null;
+    await prepareTokenProvider(cloudProjectNumber);
   }
 
   /// Requests an integrity token with the given request hash.
@@ -76,17 +92,22 @@ class PlayIntegrityServiceAndroid {
     if (provider == null) {
       throw PlayIntegrityException(
         code: PlayIntegrityErrorCode.notPrepared,
-        message: 'Token provider not prepared. Call prepareTokenProvider first.',
+        message:
+            'Token provider not prepared. Call prepareTokenProvider first.',
       );
     }
 
     try {
-      return await _jni.requestToken(provider: provider, requestHash: requestHash);
+      return await _jni.requestToken(
+        provider: provider,
+        requestHash: requestHash,
+      );
     } on JniNativeError catch (e) {
       throw PlayIntegrityException(
         code: PlayIntegrityErrorCode.requestFailed,
         message: 'Failed to generate integrity token',
         details: e.details,
+        nativeErrorCode: e.errorCode,
       );
     }
   }
