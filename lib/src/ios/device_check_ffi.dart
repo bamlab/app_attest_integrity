@@ -22,6 +22,15 @@ class FfiAttestationResult {
   final List<int> attestationBytes;
 }
 
+/// Raw result from FFI assertion generation.
+class FfiAssertionResult {
+  /// Creates a new [FfiAssertionResult] with the given [assertionBytes].
+  FfiAssertionResult({required this.assertionBytes});
+
+  /// The raw assertion object bytes.
+  final List<int> assertionBytes;
+}
+
 /// Raw error from native iOS APIs.
 class FfiNativeError {
   /// Creates a new [FfiNativeError].
@@ -100,6 +109,39 @@ class DeviceCheckFfi {
         }
         completer.complete(
           FfiAttestationResult(attestationBytes: attestationObject.toList()),
+        );
+      }),
+    );
+
+    return completer.future;
+  }
+
+  /// Generates an assertion for the given key and client data hash.
+  /// [keyId] is the key ID from [generateKey].
+  /// [clientDataHash] is the raw hash bytes.
+  /// Returns assertion bytes on success, throws [FfiNativeError] on failure.
+  Future<FfiAssertionResult> generateAssertion({
+    required String keyId,
+    required List<int> clientDataHash,
+  }) {
+    final completer = Completer<FfiAssertionResult>();
+
+    final nsKeyId = keyId.toNSString();
+    final nsDataHash = clientDataHash.toNSData();
+
+    _service.generateAssertion(
+      nsKeyId,
+      clientDataHash: nsDataHash,
+      completionHandler: bindings.ObjCBlock_ffiVoid_NSData_NSError.listener((
+        assertionObject,
+        error,
+      ) {
+        if (error != null || assertionObject == null) {
+          completer.completeError(_extractError(error));
+          return;
+        }
+        completer.complete(
+          FfiAssertionResult(assertionBytes: assertionObject.toList()),
         );
       }),
     );

@@ -19,6 +19,9 @@ enum AppAttestErrorCode {
 
   /// Failed to attest the key.
   attestKeyFailed,
+
+  /// Failed to generate an assertion.
+  generateAssertionFailed,
 }
 
 /// Exception thrown by App Attest operations.
@@ -92,6 +95,31 @@ class AppAttestServiceIos {
       throw AppAttestException(
         code: AppAttestErrorCode.attestKeyFailed,
         message: 'Failed to attest App Attest key.',
+        nativeError: _errorToMap(e),
+      );
+    }
+  }
+
+  /// Generates an assertion for verification.
+  ///
+  /// [keyId] is the key ID from a previous attestation.
+  /// [clientDataHash] should be the SHA256 hash of the client data.
+  /// Returns the assertion bytes on success.
+  /// Throws [AppAttestException] on failure.
+  Future<List<int>> generateAssertion({
+    required String keyId,
+    required List<int> clientDataHash,
+  }) async {
+    try {
+      final result = await _ffi.generateAssertion(
+        keyId: keyId,
+        clientDataHash: clientDataHash,
+      );
+      return result.assertionBytes;
+    } on FfiNativeError catch (e) {
+      throw AppAttestException(
+        code: AppAttestErrorCode.generateAssertionFailed,
+        message: 'Failed to generate assertion.',
         nativeError: _errorToMap(e),
       );
     }

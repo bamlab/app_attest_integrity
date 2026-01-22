@@ -33,4 +33,34 @@ class AppAttestIntegrityIos extends AppAttestIntegrityPlatform {
       );
     }
   }
+
+  @override
+  Future<String> verify({
+    required String clientData,
+    String? iOSkeyID,
+    int? androidCloudProjectNumber,
+  }) async {
+    if (iOSkeyID == null) {
+      throw PlatformException(
+        code: 'missing_key_id',
+        message: 'iOSkeyID is required for iOS verification.',
+      );
+    }
+
+    try {
+      final clientDataHash = CryptoUtils.sha256Hash(clientData);
+      final assertionBytes = await _service.generateAssertion(
+        keyId: iOSkeyID,
+        clientDataHash: clientDataHash,
+      );
+
+      return CryptoUtils.toBase64(assertionBytes);
+    } on AppAttestException catch (e) {
+      throw PlatformException(
+        code: e.code.name,
+        message: e.message,
+        details: e.nativeError,
+      );
+    }
+  }
 }
