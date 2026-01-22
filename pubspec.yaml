@@ -32,5 +32,8 @@ dev_dependencies:
 flutter:
   plugin:
     platforms:
+      android:
+        package: com.theodo.app_attest_integrity
+        pluginClass: AppAttestIntegrityPlugin
       ios:
         ffiPlugin: true
