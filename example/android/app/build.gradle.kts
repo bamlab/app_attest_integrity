@@ -42,3 +42,8 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    implementation("com.google.android.play:integrity:1.4.0")
+    implementation("com.google.android.gms:play-services-tasks:18.3.2")
+}

@@ -1,5 +1,7 @@
+import 'dart:io' show Platform;
+
 import 'package:app_attest_integrity/app_attest_integrity_ffi.dart';
-import 'package:app_attest_integrity/app_attest_integrity_method_channel.dart';
+import 'package:app_attest_integrity/app_attest_integrity_jni.dart';
 import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -15,11 +17,22 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
   // ignore: no-object-declaration, standard for platform interface
   static final Object _token = Object();
 
-  static AppAttestIntegrityPlatform _instance = AppAttestIntegrityFfi();
+  static AppAttestIntegrityPlatform _instance = _createDefaultInstance();
+
+  static AppAttestIntegrityPlatform _createDefaultInstance() {
+    if (Platform.isIOS) {
+      return AppAttestIntegrityFfi();
+    } else if (Platform.isAndroid) {
+      return AppAttestIntegrityJni();
+    }
+    throw UnsupportedError(
+      'AppAttestIntegrity is only supported on iOS and Android.',
+    );
+  }
 
   /// The default instance of [AppAttestIntegrityPlatform] to use.
   ///
-  /// Defaults to [MethodChannelAppAttestIntegrity].
+  /// Uses FFI on iOS and JNI on Android.
   static AppAttestIntegrityPlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own
