@@ -1,7 +1,7 @@
 import 'dart:io' show Platform;
 
-import 'package:app_attest_integrity/app_attest_integrity_ffi.dart';
-import 'package:app_attest_integrity/app_attest_integrity_jni.dart';
+import 'package:app_attest_integrity/app_attest_integrity_android.dart';
+import 'package:app_attest_integrity/app_attest_integrity_ios.dart';
 import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
@@ -21,9 +21,9 @@ abstract class AppAttestIntegrityPlatform extends PlatformInterface {
 
   static AppAttestIntegrityPlatform _createDefaultInstance() {
     if (Platform.isIOS) {
-      return AppAttestIntegrityFfi();
+      return AppAttestIntegrityIos();
     } else if (Platform.isAndroid) {
-      return AppAttestIntegrityJni();
+      return AppAttestIntegrityAndroid();
     }
     throw UnsupportedError(
       'AppAttestIntegrity is only supported on iOS and Android.',
