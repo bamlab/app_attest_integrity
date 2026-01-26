@@ -1,7 +1,7 @@
 import 'dart:io' show Platform;
 
-import 'package:app_attest_integrity/app_attest_integrity_android.dart';
-import 'package:app_attest_integrity/app_attest_integrity_ios.dart';
+import 'package:app_attest_integrity/src/android/app_attest_integrity_android.dart';
+import 'package:app_attest_integrity/src/ios/app_attest_integrity_ios.dart';
 import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
