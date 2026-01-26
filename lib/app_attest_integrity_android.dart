@@ -4,6 +4,7 @@ import 'package:app_attest_integrity/src/android/play_integrity_service_android.
 import 'package:app_attest_integrity/src/core/crypto_utils.dart';
 import 'package:app_attest_integrity/src/model/generate_attestation_response.dart';
 import 'package:flutter/services.dart';
+import 'package:retry/retry.dart';
 
 /// Implementation of [AppAttestIntegrityPlatform] for Android.
 /// Uses JNI to communicate with Play Integrity API.
@@ -44,48 +45,37 @@ class AppAttestIntegrityAndroid extends AppAttestIntegrityPlatform {
   }) async {
     final projectNumber = androidCloudProjectNumber ?? _cloudProjectNumber;
 
-    // Ensure token provider is prepared
+    if (projectNumber == null) {
+      throw PlatformException(
+        code: 'no_project_number',
+        message:
+            'cloudProjectNumber not set. Call androidPrepareIntegrityServer first or provide androidCloudProjectNumber.',
+      );
+    }
+
     if (!_service.isPrepared) {
-      if (projectNumber == null) {
-        throw PlatformException(
-          code: 'no_project_number',
-          message:
-              'cloudProjectNumber not set. Call androidPrepareIntegrityServer first or provide androidCloudProjectNumber.',
-        );
-      }
       await androidPrepareIntegrityServer(projectNumber);
     }
 
     final requestHash = CryptoUtils.sha256HashBase64(clientData);
 
-    // Retry logic for expired token providers
-    for (var attempt = 0; attempt < _maxRetries; attempt++) {
-      try {
-        return await _service.requestIntegrityToken(requestHash);
-      } on PlayIntegrityException catch (e) {
-        final isProviderInvalid =
+    try {
+      return await retry(
+        () => _service.requestIntegrityToken(requestHash),
+        maxAttempts: _maxRetries,
+        delayFactor: Duration.zero,
+        onRetry: (_) => _service.refreshTokenProvider(projectNumber),
+        retryIf: (e) =>
+            e is PlayIntegrityException &&
             e.nativeErrorCode ==
-            StandardIntegrityErrorCode.INTEGRITY_TOKEN_PROVIDER_INVALID;
-
-        // If provider is invalid and we have a project number, refresh and retry
-        if (isProviderInvalid && projectNumber != null) {
-          await _service.refreshTokenProvider(projectNumber);
-          continue;
-        }
-
-        // Otherwise, throw the error
-        throw PlatformException(
-          code: e.code.name,
-          message: e.message,
-          details: e.details,
-        );
-      }
+                StandardIntegrityErrorCode.INTEGRITY_TOKEN_PROVIDER_INVALID,
+      );
+    } on PlayIntegrityException catch (e) {
+      throw PlatformException(
+        code: e.code.name,
+        message: e.message,
+        details: e.details,
+      );
     }
-
-    // If we exhausted all retries
-    throw PlatformException(
-      code: 'max_retries_exceeded',
-      message: 'Failed to get integrity token after $_maxRetries attempts.',
-    );
   }
 }
