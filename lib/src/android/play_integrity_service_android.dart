@@ -78,8 +78,17 @@ class PlayIntegrityServiceAndroid {
   /// (INTEGRITY_TOKEN_PROVIDER_INVALID error).
   /// Throws [PlayIntegrityException] on failure.
   Future<void> refreshTokenProvider(int cloudProjectNumber) async {
-    _tokenProvider = null;
-    await prepareTokenProvider(cloudProjectNumber);
+    try {
+      final newProvider = await _jni.prepareTokenProvider(cloudProjectNumber);
+      _tokenProvider = newProvider;
+    } on JniNativeError catch (e) {
+      throw PlayIntegrityException(
+        code: PlayIntegrityErrorCode.prepareFailed,
+        message: 'Failed to refresh integrity token provider',
+        details: e.details,
+        nativeErrorCode: e.errorCode,
+      );
+    }
   }
 
   /// Requests an integrity token with the given request hash.
