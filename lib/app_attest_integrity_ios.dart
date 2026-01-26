@@ -10,6 +10,11 @@ class AppAttestIntegrityIos extends AppAttestIntegrityPlatform {
   final AppAttestServiceIos _service = AppAttestServiceIos();
 
   @override
+  Future<void> androidPrepareIntegrityServer(int cloudProjectNumber) async {
+    // No-op on iOS - this is an Android-only API
+  }
+
+  @override
   Future<GenerateAttestationResponse?> iOSgenerateAttestation(
     String challenge,
   ) async {
