@@ -19,7 +19,10 @@ class AppAttestIntegrityIos extends AppAttestIntegrityPlatform {
     String challenge,
   ) async {
     if (!_service.isSupported) {
-      throw Exception('App Attest is not supported on this device.');
+      throw PlatformException(
+        code: 'unsupported_device',
+        message: 'App Attest is not supported on this device.',
+      );
     }
 
     try {
