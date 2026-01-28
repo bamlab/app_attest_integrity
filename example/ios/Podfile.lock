@@ -4,11 +4,14 @@ PODS:
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
+  - objective_c (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - app_attest_integrity (from `.symlinks/plugins/app_attest_integrity/ios`)
   - Flutter (from `Flutter`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - objective_c (from `.symlinks/plugins/objective_c/ios`)
 
 EXTERNAL SOURCES:
   app_attest_integrity:
@@ -17,11 +20,14 @@ EXTERNAL SOURCES:
     :path: Flutter
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
+  objective_c:
+    :path: ".symlinks/plugins/objective_c/ios"
 
 SPEC CHECKSUMS:
-  app_attest_integrity: 0944379c25ab94fa18dd42f63981ef9a2dcb3094
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  app_attest_integrity: fd65f2cf1204cf2204fd7a1c2320cf49bec09416
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
+  objective_c: 89e720c30d716b036faf9c9684022048eee1eee2
 
 PODFILE CHECKSUM: e30f02f9d1c72c47bb6344a0a748c9d268180865
 

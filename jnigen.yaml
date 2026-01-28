@@ -1,0 +1,28 @@
+output:
+  dart:
+    path: lib/src/android/play_integrity_bindings.g.dart
+    structure: single_file
+
+# Use the downloaded JARs locally
+class_path:
+  - '.jnigen_deps/classes.jar'
+  - '.jnigen_deps/tasks/classes.jar'
+
+android_sdk_config:
+  versions:
+    - '35'
+
+classes:
+  # Play Integrity API
+  - 'com.google.android.play.core.integrity.IntegrityManagerFactory'
+  - 'com.google.android.play.core.integrity.StandardIntegrityManager'
+  - 'com.google.android.play.core.integrity.StandardIntegrityException'
+  - 'com.google.android.play.core.integrity.model.StandardIntegrityErrorCode'
+  
+  # Google Play Services Tasks (for async handling)
+  - 'com.google.android.gms.tasks.Task'
+  - 'com.google.android.gms.tasks.OnSuccessListener'
+  - 'com.google.android.gms.tasks.OnFailureListener'
+
+summarizer:
+  backend: asm
