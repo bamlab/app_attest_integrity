@@ -12,6 +12,9 @@ void main() {
   final generator = FfiGenerator(
     output: Output(
       dartFile: Uri.parse('lib/src/ios/device_check_bindings.g.dart'),
+      style: const NativeExternalBindings(
+        assetId: 'package:app_attest_integrity/app_attest_integrity.dylib',
+      ),
     ),
     headers: Headers(
       entryPoints: [
