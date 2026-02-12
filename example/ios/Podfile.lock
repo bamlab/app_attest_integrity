@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/objective_c/ios"
 
 SPEC CHECKSUMS:
-  app_attest_integrity: fd65f2cf1204cf2204fd7a1c2320cf49bec09416
+  app_attest_integrity: ecc391bf747d593821265438895d038e63df0d2a
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
   objective_c: 89e720c30d716b036faf9c9684022048eee1eee2
