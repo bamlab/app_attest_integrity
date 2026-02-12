@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:app_attest_integrity/src/ios/device_check_bindings.g.dart'
     as bindings;
@@ -55,6 +56,14 @@ class DeviceCheckFfi {
 
   /// Gets the shared App Attest service instance.
   factory DeviceCheckFfi.shared() {
+    try {
+      DynamicLibrary.open(
+        '/System/Library/Frameworks/DeviceCheck.framework/DeviceCheck',
+      );
+    } catch (e) {
+      print('Erreur lors du chargement de DeviceCheck: $e');
+    }
+
     return DeviceCheckFfi._(
       service: bindings.DCAppAttestService.getSharedService(),
     );
